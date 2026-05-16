@@ -14,7 +14,66 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      partner_applications: {
+        Row: {
+          address: string
+          business_name: string
+          city: string
+          created_at: string
+          distribution_type: string | null
+          email: string
+          full_name: string
+          gst_number: string | null
+          id: string
+          message: string | null
+          mobile: string
+          monthly_capacity: string | null
+          pincode: string
+          state: string
+          status: string
+          warehouse: string | null
+          years_in_business: string | null
+        }
+        Insert: {
+          address: string
+          business_name: string
+          city: string
+          created_at?: string
+          distribution_type?: string | null
+          email: string
+          full_name: string
+          gst_number?: string | null
+          id?: string
+          message?: string | null
+          mobile: string
+          monthly_capacity?: string | null
+          pincode: string
+          state: string
+          status?: string
+          warehouse?: string | null
+          years_in_business?: string | null
+        }
+        Update: {
+          address?: string
+          business_name?: string
+          city?: string
+          created_at?: string
+          distribution_type?: string | null
+          email?: string
+          full_name?: string
+          gst_number?: string | null
+          id?: string
+          message?: string | null
+          mobile?: string
+          monthly_capacity?: string | null
+          pincode?: string
+          state?: string
+          status?: string
+          warehouse?: string | null
+          years_in_business?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
