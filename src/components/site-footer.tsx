@@ -50,8 +50,8 @@ export function SiteFooter() {
               Reach us
             </h4>
             <ul className="mt-4 space-y-3 text-background/80 text-sm">
-              <li className="flex items-center gap-2"><Mail size={16} /> partners@bonvikfoods.com</li>
-              <li className="flex items-center gap-2"><Phone size={16} /> +91 90000 00000</li>
+              <li className="flex items-center gap-2"><Mail size={16} /><span>partners@bonvikfoods.com</span></li>
+              <li className="flex items-center gap-2"><Phone size={16} /><span>+91 90000 00000</span></li>
               <li className="text-background/60">Bonvik Foods Pvt. Ltd.<br />Manufacturing & HQ, India</li>
             </ul>
           </div>
