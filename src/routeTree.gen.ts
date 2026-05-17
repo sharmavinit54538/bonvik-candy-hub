@@ -14,6 +14,7 @@ import { Route as PartnerRouteImport } from './routes/partner'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PartnerSuccessRouteImport } from './routes/partner.success'
 
 const ProductsRoute = ProductsRouteImport.update({
   id: '/products',
@@ -40,42 +41,69 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PartnerSuccessRoute = PartnerSuccessRouteImport.update({
+  id: '/success',
+  path: '/success',
+  getParentRoute: () => PartnerRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/partner': typeof PartnerRoute
+  '/partner': typeof PartnerRouteWithChildren
   '/products': typeof ProductsRoute
+  '/partner/success': typeof PartnerSuccessRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/partner': typeof PartnerRoute
+  '/partner': typeof PartnerRouteWithChildren
   '/products': typeof ProductsRoute
+  '/partner/success': typeof PartnerSuccessRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/partner': typeof PartnerRoute
+  '/partner': typeof PartnerRouteWithChildren
   '/products': typeof ProductsRoute
+  '/partner/success': typeof PartnerSuccessRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/contact' | '/partner' | '/products'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/partner'
+    | '/products'
+    | '/partner/success'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/partner' | '/products'
-  id: '__root__' | '/' | '/about' | '/contact' | '/partner' | '/products'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/partner'
+    | '/products'
+    | '/partner/success'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/partner'
+    | '/products'
+    | '/partner/success'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
-  PartnerRoute: typeof PartnerRoute
+  PartnerRoute: typeof PartnerRouteWithChildren
   ProductsRoute: typeof ProductsRoute
 }
 
@@ -116,14 +144,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/partner/success': {
+      id: '/partner/success'
+      path: '/success'
+      fullPath: '/partner/success'
+      preLoaderRoute: typeof PartnerSuccessRouteImport
+      parentRoute: typeof PartnerRoute
+    }
   }
 }
+
+interface PartnerRouteChildren {
+  PartnerSuccessRoute: typeof PartnerSuccessRoute
+}
+
+const PartnerRouteChildren: PartnerRouteChildren = {
+  PartnerSuccessRoute: PartnerSuccessRoute,
+}
+
+const PartnerRouteWithChildren =
+  PartnerRoute._addFileChildren(PartnerRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
-  PartnerRoute: PartnerRoute,
+  PartnerRoute: PartnerRouteWithChildren,
   ProductsRoute: ProductsRoute,
 }
 export const routeTree = rootRouteImport
