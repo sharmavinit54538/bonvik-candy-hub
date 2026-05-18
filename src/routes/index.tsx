@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, Shield, Truck, Heart, Star, Plus, Minus } from "lucide-react";
 import { useEffect, useState } from "react";
-import heroCandies from "@/assets/hero-candies.png";
+import heroCandies from "@/assets/brochure/hero.jpg";
 import { FloatingCandies } from "@/components/floating-candies";
 import { ProductCard } from "@/components/product-card";
 import { products } from "@/lib/products";
@@ -52,14 +52,14 @@ function HomePage() {
             >
               <span className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-semibold text-foreground/70 shadow-soft">
                 <Sparkles size={14} className="text-candy-red" />
-                India's joyful candy brand
+                Bonvik Foods — Ludhiana, Punjab
               </span>
               <h1 className="mt-5 font-display text-5xl md:text-7xl font-bold leading-[1.05] tracking-tight">
-                Sweet moments,{" "}
-                <span className="text-gradient-candy">made in India.</span>
+                <span className="text-gradient-candy">Apna Bachpan…</span>
+                <span className="block mt-2">wrapped in candy.</span>
               </h1>
               <p className="mt-6 text-lg text-foreground/70 max-w-xl">
-                Bonvik Foods crafts lollipops, jellies and chewy delights that bring back <em>Apna Bachpan</em> — and build serious business for our distributor partners.
+                From Korean Swirly Pops to Jelly Bears and Wheelish bicycles — Bonvik crafts 9 premium confectionery SKUs priced from ₹5 to ₹10, built to fly off counters across India.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
@@ -79,13 +79,13 @@ function HomePage() {
 
               <div className="mt-10 grid grid-cols-3 gap-6 max-w-md">
                 {[
-                  { n: 500, s: "+", l: "Distributors" },
-                  { n: 9, s: "+", l: "Products" },
-                  { n: 25, s: "+", l: "States" },
+                  { n: 9, s: "", l: "SKUs" },
+                  { n: 5, s: "₹", l: "Starting MRP" },
+                  { n: 100, s: "%", l: "FSSAI Safe" },
                 ].map((s) => (
                   <div key={s.l}>
                     <div className="font-display text-3xl md:text-4xl font-bold text-candy-red">
-                      <Counter to={s.n} suffix={s.s} />
+                      {s.s === "₹" ? <>₹<Counter to={s.n} /></> : <Counter to={s.n} suffix={s.s} />}
                     </div>
                     <div className="text-xs text-muted-foreground mt-1">{s.l}</div>
                   </div>

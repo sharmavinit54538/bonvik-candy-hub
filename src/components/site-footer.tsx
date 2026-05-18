@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Facebook, Youtube, Mail, Phone } from "lucide-react";
+import { Instagram, Facebook, Youtube, Mail, Phone, MapPin } from "lucide-react";
 
 export function SiteFooter() {
   return (
@@ -17,7 +17,7 @@ export function SiteFooter() {
               </span>
             </div>
             <p className="mt-4 text-background/70">
-              Apna Bachpan… We craft joyful candies and partner with India's most ambitious distributors to put a smile on every counter.
+              Apna Bachpan… Bonvik Foods crafts joyful Indian confectionery — lollipops, jellies and candy toys — and partners with the country's most ambitious distributors.
             </p>
             <div className="mt-6 flex items-center gap-3">
               {[Instagram, Facebook, Youtube].map((Icon, i) => (
@@ -50,9 +50,21 @@ export function SiteFooter() {
               Reach us
             </h4>
             <ul className="mt-4 space-y-3 text-background/80 text-sm">
-              <li className="flex items-center gap-2"><Mail size={16} /><span>partners@bonvikfoods.com</span></li>
-              <li className="flex items-center gap-2"><Phone size={16} /><span>+91 90000 00000</span></li>
-              <li className="text-background/60">Bonvik Foods Pvt. Ltd.<br />Manufacturing & HQ, India</li>
+              <li className="flex items-start gap-2">
+                <Mail size={16} className="mt-0.5 shrink-0" />
+                <a href="mailto:Bonvikfoods@gmail.com" className="hover:text-candy-yellow break-all">Bonvikfoods@gmail.com</a>
+              </li>
+              <li className="flex items-start gap-2">
+                <Phone size={16} className="mt-0.5 shrink-0" />
+                <span>
+                  <a href="tel:+919988827786" className="hover:text-candy-yellow block">+91 99888 27786</a>
+                  <a href="tel:+919891914300" className="hover:text-candy-yellow block">+91 98919 14300</a>
+                </span>
+              </li>
+              <li className="flex items-start gap-2 text-background/60">
+                <MapPin size={16} className="mt-0.5 shrink-0" />
+                <span>New Shivaji Nagar,<br />Hargobind Nagar Road,<br />Ludhiana 141008, Punjab.</span>
+              </li>
             </ul>
           </div>
         </div>
