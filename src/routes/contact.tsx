@@ -63,10 +63,11 @@ function ContactPage() {
             className="lg:col-span-2 space-y-4"
           >
             {[
-              { icon: Mail, label: "Email", value: "partners@bonvikfoods.com", href: "mailto:partners@bonvikfoods.com" },
-              { icon: Phone, label: "Phone", value: "+91 90000 00000", href: "tel:+919000000000" },
-              { icon: MessageCircle, label: "WhatsApp", value: "Chat with our team", href: "https://wa.me/919000000000" },
-              { icon: MapPin, label: "HQ", value: "Bonvik Foods Pvt. Ltd., India" },
+              { icon: Mail, label: "Email", value: "Bonvikfoods@gmail.com", href: "mailto:Bonvikfoods@gmail.com" },
+              { icon: Phone, label: "Phone", value: "+91 99888 27786", href: "tel:+919988827786" },
+              { icon: Phone, label: "Alt. Phone", value: "+91 98919 14300", href: "tel:+919891914300" },
+              { icon: MessageCircle, label: "WhatsApp", value: "Chat with our partner team", href: "https://wa.me/919988827786" },
+              { icon: MapPin, label: "Head Office", value: "New Shivaji Nagar, Hargobind Nagar Road, Ludhiana 141008, Punjab" },
             ].map((c, i) => (
               <motion.a
                 key={c.label}

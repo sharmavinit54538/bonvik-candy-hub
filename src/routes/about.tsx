@@ -32,7 +32,10 @@ function AboutPage() {
             Built around <span className="text-gradient-candy">Apna Bachpan</span>.
           </h1>
           <p className="mt-6 text-lg text-foreground/70">
-            Bonvik Foods started with a simple thought — childhood deserves better candy. Today we craft a premium range of confectionery loved by kids and trusted by retailers across India.
+            Bonvik is dedicated to creating moments of sweetness and delight, beginning our journey with a vibrant range of confectionery products that blend taste, creativity and quality. Driven by passion and innovation, every Bonvik product is crafted with care so customers enjoy memorable indulgences with every bite.
+          </p>
+          <p className="mt-4 text-foreground/60 max-w-2xl mx-auto">
+            Looking ahead, Bonvik strives to evolve into a versatile food company — expanding beyond confectionery to spread happiness, enrich lives, and become a trusted name recognised for quality, creativity and variety.
           </p>
         </div>
       </section>
