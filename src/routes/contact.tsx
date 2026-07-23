@@ -1,8 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, MessageCircle, Send } from "lucide-react";
-import { useState } from "react";
+import { Mail, Phone, MapPin, MessageCircle, LayoutDashboard } from "lucide-react";
 import { toast } from "sonner";
+import { LeadForm, type LeadFormValues } from "@/components/leads/LeadForm";
+import { useLeadStore } from "@/lib/leads/store";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -17,15 +18,12 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
-  const [sending, setSending] = useState(false);
+  const addLead = useLeadStore((s) => s.addLead);
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSending(true);
-    await new Promise((r) => setTimeout(r, 700));
-    setSending(false);
+  const onSubmit = async (values: LeadFormValues) => {
+    await new Promise((r) => setTimeout(r, 400));
+    addLead({ ...values, source: "Contact Form" });
     toast.success("Thanks! We'll reply within 24 hours.");
-    (e.target as HTMLFormElement).reset();
   };
 
   return (
@@ -51,6 +49,11 @@ function ContactPage() {
           <p className="mt-5 text-foreground/70 max-w-xl mx-auto">
             Partnership, wholesale, retail or just a sweet idea — drop us a line.
           </p>
+          <div className="mt-6">
+            <Link to="/admin/leads" className="inline-flex items-center gap-2 rounded-full glass px-4 py-2 text-xs font-semibold text-foreground/70 hover:text-foreground">
+              <LayoutDashboard size={14} /> Open Lead dashboard
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -91,53 +94,16 @@ function ContactPage() {
             ))}
           </motion.div>
 
-          <motion.form
-            onSubmit={onSubmit}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-3 rounded-3xl glass p-6 md:p-8 shadow-soft space-y-4"
+            className="lg:col-span-3 rounded-3xl glass p-6 md:p-8 shadow-soft"
           >
-            <div className="grid md:grid-cols-2 gap-4">
-              <Field label="Your name" name="name" required maxLength={100} />
-              <Field label="Email" name="email" type="email" required maxLength={255} />
-            </div>
-            <Field label="Subject" name="subject" required maxLength={150} />
-            <div>
-              <label className="block text-sm font-medium text-foreground/70 mb-1.5">Message</label>
-              <textarea
-                name="message"
-                required
-                maxLength={1000}
-                rows={5}
-                className="w-full rounded-2xl border border-border bg-background/60 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-candy-red transition"
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={sending}
-              className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-sm font-semibold hover:bg-candy-red transition-colors shadow-pop disabled:opacity-60"
-            >
-              {sending ? "Sending…" : (<><Send size={16} /> Send message</>)}
-            </button>
-          </motion.form>
+            <LeadForm onSubmit={onSubmit} />
+          </motion.div>
         </div>
       </section>
     </>
-  );
-}
-
-function Field({ label, name, type = "text", required, maxLength }: { label: string; name: string; type?: string; required?: boolean; maxLength?: number }) {
-  return (
-    <div>
-      <label className="block text-sm font-medium text-foreground/70 mb-1.5">{label}</label>
-      <input
-        name={name}
-        type={type}
-        required={required}
-        maxLength={maxLength}
-        className="w-full rounded-2xl border border-border bg-background/60 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-candy-red transition"
-      />
-    </div>
   );
 }
