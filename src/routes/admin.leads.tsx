@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Download, Plus, Sparkles, Trash2 } from "lucide-react";
+import { Download, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
 import { useLeadStore } from "@/lib/leads/store";
@@ -13,7 +13,7 @@ import { LeadTable } from "@/components/leads/LeadTable";
 import { LeadDrawer } from "@/components/leads/LeadDrawer";
 import { LeadForm, type LeadFormValues } from "@/components/leads/LeadForm";
 import { downloadCsv, leadsToCsv } from "@/lib/leads/export";
-import { makeDemoLeads } from "@/lib/leads/seed";
+
 
 export const Route = createFileRoute("/admin/leads")({
   head: () => ({
@@ -54,13 +54,7 @@ function AdminLeadsPage() {
     toast.success("Lead added");
   };
 
-  const onSeed = () => {
-    const demo = makeDemoLeads(8);
-    demo.forEach((d) =>
-      addLead({ name: d.name, company: d.company, email: d.email, phone: d.phone, subject: d.subject, message: d.message, status: d.status, priority: d.priority, source: d.source })
-    );
-    toast.success("Demo leads added");
-  };
+
 
   return (
     <div className="min-h-screen bg-slate-950 text-white -mt-20 pt-24 pb-16">
@@ -75,9 +69,7 @@ function AdminLeadsPage() {
           </div>
           <div className="flex flex-wrap gap-2">
             <Link to="/contact" className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-semibold text-white/80 hover:bg-white/10">← Contact form</Link>
-            <button onClick={onSeed} className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-semibold text-white/80 hover:bg-white/10">
-              <Sparkles className="h-3.5 w-3.5" /> Seed demo
-            </button>
+
             <button
               onClick={() => { if (leads.length === 0) return toast.error("No leads to export"); downloadCsv(`bonvik-leads-${new Date().toISOString().slice(0, 10)}.csv`, leadsToCsv(leads)); }}
               className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-semibold text-white/80 hover:bg-white/10"
