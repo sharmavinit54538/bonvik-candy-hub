@@ -77,10 +77,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Bonvik Foods — Apna Bachpan" },
-      { name: "description", content: "Premium Indian candy brand. Partner with Bonvik Foods to distribute joyful, kid-loved confectionery across India." },
+      {
+        name: "description",
+        content:
+          "Premium Indian candy brand. Partner with Bonvik Foods to distribute joyful, kid-loved confectionery across India.",
+      },
       { name: "author", content: "Bonvik Foods" },
       { property: "og:title", content: "Bonvik Foods — Apna Bachpan" },
-      { property: "og:description", content: "Premium confectionery & FMCG candy brand. Become a distributor partner today." },
+      {
+        property: "og:description",
+        content: "Premium confectionery & FMCG candy brand. Become a distributor partner today.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "theme-color", content: "#FF2E4D" },

@@ -26,7 +26,8 @@ export const products: Product[] = [
     slug: "fruity-pop",
     name: "Fruity Pop",
     tagline: "Fruit flavour lollipop",
-    description: "Juicy fruit-flavoured lollipops in five irresistible flavours. The shelf-magnet that moves cartons.",
+    description:
+      "Juicy fruit-flavoured lollipops in five irresistible flavours. The shelf-magnet that moves cartons.",
     mrp: "₹5",
     packPrice: "₹360",
     pieces: "72 pcs × ₹5",
@@ -38,7 +39,8 @@ export const products: Product[] = [
     slug: "jelly-shapes",
     name: "Jelly Shapes",
     tagline: "Fruity flavour soft candy",
-    description: "Soft, chewy fruit jellies in rings, cubes and hearts. Comes with a FREE gift inside every pack.",
+    description:
+      "Soft, chewy fruit jellies in rings, cubes and hearts. Comes with a FREE gift inside every pack.",
     mrp: "₹10",
     packPrice: "₹240",
     pieces: "24 pcs × ₹10",
@@ -50,7 +52,8 @@ export const products: Product[] = [
     slug: "jelly-bears",
     name: "Jelly Bears",
     tagline: "Soft candy with free gift",
-    description: "Cuddly fruity bear-shaped soft candy in pink hero-packs. Free gift inside — kids ask by name.",
+    description:
+      "Cuddly fruity bear-shaped soft candy in pink hero-packs. Free gift inside — kids ask by name.",
     mrp: "₹10",
     packPrice: "₹240",
     pieces: "24 pcs × ₹10",
@@ -62,7 +65,8 @@ export const products: Product[] = [
     slug: "korean-swirly-pops",
     name: "Korean Swirly Pops",
     tagline: "K-pop inspired swirl lollipops",
-    description: "Premium round swirl pops with sweet Korean phrases — Saranghae, Happy Birthday, I Miss You & more. Built to gift, built to sell.",
+    description:
+      "Premium round swirl pops with sweet Korean phrases — Saranghae, Happy Birthday, I Miss You & more. Built to gift, built to sell.",
     mrp: "₹10",
     packPrice: "₹250",
     pieces: "25 pcs × ₹10",
@@ -74,7 +78,8 @@ export const products: Product[] = [
     slug: "twist-spring-pops",
     name: "Twist Spring Pops",
     tagline: "Spiral hard-boiled candy on a stick",
-    description: "Hand-pulled twist spring pops in five vibrant colours. Confetti display box turns counters into magnets.",
+    description:
+      "Hand-pulled twist spring pops in five vibrant colours. Confetti display box turns counters into magnets.",
     mrp: "₹10",
     packPrice: "₹250",
     pieces: "25 pcs × ₹10",
@@ -86,7 +91,8 @@ export const products: Product[] = [
     slug: "rollypop",
     name: "Rollypop",
     tagline: "Classic swirl lollipop jar",
-    description: "The OG round swirl lollipops in display-ready candy jars — red, yellow and blue. A counter classic at just ₹5.",
+    description:
+      "The OG round swirl lollipops in display-ready candy jars — red, yellow and blue. A counter classic at just ₹5.",
     mrp: "₹5",
     packPrice: "₹200",
     pieces: "40 pcs × ₹5",
@@ -98,7 +104,8 @@ export const products: Product[] = [
     slug: "pom-pop",
     name: "Pom Pop",
     tagline: "Soft jelly spiral pops",
-    description: "Sugar-dusted swirl jelly pops in cherry, orange and apple. Display jars built for impulse buys.",
+    description:
+      "Sugar-dusted swirl jelly pops in cherry, orange and apple. Display jars built for impulse buys.",
     mrp: "₹5",
     packPrice: "₹200",
     pieces: "40 pcs × ₹5",
@@ -110,7 +117,8 @@ export const products: Product[] = [
     slug: "wheelish",
     name: "Wheelish",
     tagline: "Bicycle-shaped candy dispenser",
-    description: "A tiny bicycle whose wheels are see-through candy jars. Toy + candy in one — kids beg for it.",
+    description:
+      "A tiny bicycle whose wheels are see-through candy jars. Toy + candy in one — kids beg for it.",
     mrp: "₹10",
     packPrice: "₹240",
     pieces: "24 pcs × ₹10",
@@ -122,7 +130,8 @@ export const products: Product[] = [
     slug: "puzzle-ball",
     name: "Puzzle Ball",
     tagline: "Puzzle toy + candy beads",
-    description: "Interlocking puzzle ball with colourful candy beads inside. Play it, solve it, snack it — every kid's favourite.",
+    description:
+      "Interlocking puzzle ball with colourful candy beads inside. Play it, solve it, snack it — every kid's favourite.",
     mrp: "₹10",
     packPrice: "₹300",
     pieces: "30 pcs × ₹10",

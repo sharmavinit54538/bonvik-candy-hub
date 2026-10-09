@@ -6,8 +6,23 @@ function escapeCsv(v: string) {
 }
 
 export function leadsToCsv(leads: Lead[]): string {
-  const headers = ["id", "name", "company", "email", "phone", "subject", "message", "status", "priority", "source", "createdAt", "updatedAt"];
-  const rows = leads.map((l) => headers.map((h) => escapeCsv(String((l as any)[h] ?? ""))).join(","));
+  const headers = [
+    "id",
+    "name",
+    "company",
+    "email",
+    "phone",
+    "subject",
+    "message",
+    "status",
+    "priority",
+    "source",
+    "createdAt",
+    "updatedAt",
+  ];
+  const rows = leads.map((l) =>
+    headers.map((h) => escapeCsv(String((l as any)[h] ?? ""))).join(","),
+  );
   return [headers.join(","), ...rows].join("\n");
 }
 

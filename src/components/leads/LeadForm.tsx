@@ -9,10 +9,17 @@ export const leadSchema = z.object({
   name: z.string().trim().min(2, "Enter name").max(100),
   company: z.string().trim().max(120).optional().or(z.literal("")),
   email: z.string().trim().email("Invalid email").max(255),
-  phone: z.string().trim().min(7, "Enter a valid phone").max(20).regex(/^[+\d\s\-()]+$/, "Digits and + - ( ) only"),
+  phone: z
+    .string()
+    .trim()
+    .min(7, "Enter a valid phone")
+    .max(20)
+    .regex(/^[+\d\s\-()]+$/, "Digits and + - ( ) only"),
   subject: z.string().trim().min(2, "Add a subject").max(150),
   message: z.string().trim().min(5, "Message too short").max(1000),
-  source: z.enum(["Contact Form", "Partner Form", "Referral", "Instagram", "WhatsApp", "Other"]).optional(),
+  source: z
+    .enum(["Contact Form", "Partner Form", "Referral", "Instagram", "WhatsApp", "Other"])
+    .optional(),
   priority: z.enum(["Low", "Medium", "High"]).optional(),
   status: z.enum(["New", "Contacted", "Qualified", "Won", "Lost"]).optional(),
   notes: z.string().trim().max(1000).optional().or(z.literal("")),
@@ -70,13 +77,22 @@ export function LeadForm({
           <input {...register("name")} className={inputCls} placeholder="e.g. Rajesh Kumar" />
         </Field>
         <Field label="Company / Business" error={errors.company?.message}>
-          <input {...register("company")} className={inputCls} placeholder="e.g. Sweet Treats Co." />
+          <input
+            {...register("company")}
+            className={inputCls}
+            placeholder="e.g. Sweet Treats Co."
+          />
         </Field>
       </div>
 
       <div className="grid md:grid-cols-2 gap-4">
         <Field label="Email" error={errors.email?.message}>
-          <input type="email" {...register("email")} className={inputCls} placeholder="name@company.com" />
+          <input
+            type="email"
+            {...register("email")}
+            className={inputCls}
+            placeholder="name@company.com"
+          />
         </Field>
         <Field label="Phone" error={errors.phone?.message}>
           <input {...register("phone")} className={inputCls} placeholder="+91 98765 43210" />
@@ -116,16 +132,30 @@ export function LeadForm({
       )}
 
       <Field label="Subject" error={errors.subject?.message}>
-        <input {...register("subject")} className={inputCls} placeholder="e.g. Distribution inquiry for Punjab region" />
+        <input
+          {...register("subject")}
+          className={inputCls}
+          placeholder="e.g. Distribution inquiry for Punjab region"
+        />
       </Field>
 
       <Field label="Message" error={errors.message?.message}>
-        <textarea rows={showAdminFields ? 3 : 5} {...register("message")} className={inputCls} placeholder="Tell us more about your inquiry..." />
+        <textarea
+          rows={showAdminFields ? 3 : 5}
+          {...register("message")}
+          className={inputCls}
+          placeholder="Tell us more about your inquiry..."
+        />
       </Field>
 
       {showAdminFields && (
         <Field label="Internal Notes (Optional)" error={errors.notes?.message}>
-          <textarea rows={2} {...register("notes")} className={inputCls} placeholder="Internal admin notes..." />
+          <textarea
+            rows={2}
+            {...register("notes")}
+            className={inputCls}
+            placeholder="Internal admin notes..."
+          />
         </Field>
       )}
 
@@ -134,7 +164,9 @@ export function LeadForm({
         disabled={isSubmitting}
         className="inline-flex items-center gap-2 rounded-full bg-gradient-candy text-white px-6 py-3 text-sm font-semibold shadow-candy hover:opacity-90 transition-opacity disabled:opacity-60"
       >
-        {isSubmitting ? "Saving..." : (
+        {isSubmitting ? (
+          "Saving..."
+        ) : (
           <>
             <Send size={16} /> {submitLabel}
           </>
@@ -150,7 +182,15 @@ const inputCls =
 const selectCls =
   "w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-candy-red transition";
 
-function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
+function Field({
+  label,
+  error,
+  children,
+}: {
+  label: string;
+  error?: string;
+  children: React.ReactNode;
+}) {
   return (
     <div>
       <label className="block text-sm font-medium text-foreground/70 mb-1.5">{label}</label>

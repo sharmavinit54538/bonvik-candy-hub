@@ -11,15 +11,30 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Bonvik Foods — Apna Bachpan | Premium Indian Candy Brand" },
-      { name: "description", content: "Bonvik Foods crafts joyful lollipops, jellies and confectionery. Partner with India's fastest-growing candy brand." },
+      {
+        name: "description",
+        content:
+          "Bonvik Foods crafts joyful lollipops, jellies and confectionery. Partner with India's fastest-growing candy brand.",
+      },
       { property: "og:title", content: "Bonvik Foods — Apna Bachpan" },
-      { property: "og:description", content: "Premium Indian candy brand. Become a distributor partner today." },
+      {
+        property: "og:description",
+        content: "Premium Indian candy brand. Become a distributor partner today.",
+      },
     ],
   }),
   component: HomePage,
 });
 
-function Counter({ to, suffix = "", duration = 1.6 }: { to: number; suffix?: string; duration?: number }) {
+function Counter({
+  to,
+  suffix = "",
+  duration = 1.6,
+}: {
+  to: number;
+  suffix?: string;
+  duration?: number;
+}) {
   const [val, setVal] = useState(0);
   useEffect(() => {
     let raf = 0;
@@ -32,7 +47,12 @@ function Counter({ to, suffix = "", duration = 1.6 }: { to: number; suffix?: str
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [to, duration]);
-  return <span>{val.toLocaleString()}{suffix}</span>;
+  return (
+    <span>
+      {val.toLocaleString()}
+      {suffix}
+    </span>
+  );
 }
 
 function HomePage() {
@@ -59,7 +79,9 @@ function HomePage() {
                 <span className="block mt-2">wrapped in candy.</span>
               </h1>
               <p className="mt-6 text-lg text-foreground/70 max-w-xl">
-                From Korean Swirly Pops to Jelly Bears and Wheelish bicycles — Bonvik crafts 9 premium confectionery SKUs priced from ₹5 to ₹10, built to fly off counters across India.
+                From Korean Swirly Pops to Jelly Bears and Wheelish bicycles — Bonvik crafts 9
+                premium confectionery SKUs priced from ₹5 to ₹10, built to fly off counters across
+                India.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
@@ -67,7 +89,10 @@ function HomePage() {
                   className="group inline-flex items-center gap-2 rounded-full bg-gradient-candy text-white px-7 py-4 text-sm font-semibold shadow-candy hover:scale-105 transition-transform"
                 >
                   Become a Partner
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight
+                    size={16}
+                    className="group-hover:translate-x-1 transition-transform"
+                  />
                 </Link>
                 <Link
                   to="/products"
@@ -85,7 +110,13 @@ function HomePage() {
                 ].map((s) => (
                   <div key={s.l}>
                     <div className="font-display text-3xl md:text-4xl font-bold text-candy-red">
-                      {s.s === "₹" ? <>₹<Counter to={s.n} /></> : <Counter to={s.n} suffix={s.s} />}
+                      {s.s === "₹" ? (
+                        <>
+                          ₹<Counter to={s.n} />
+                        </>
+                      ) : (
+                        <Counter to={s.n} suffix={s.s} />
+                      )}
                     </div>
                     <div className="text-xs text-muted-foreground mt-1">{s.l}</div>
                   </div>
@@ -134,12 +165,17 @@ function HomePage() {
       <section className="container mx-auto px-4 py-24">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div className="max-w-xl">
-            <span className="text-sm font-semibold text-candy-red uppercase tracking-wider">Our Products</span>
+            <span className="text-sm font-semibold text-candy-red uppercase tracking-wider">
+              Our Products
+            </span>
             <h2 className="mt-2 font-display text-4xl md:text-5xl font-bold">
               A counter-magnet for every age.
             </h2>
           </div>
-          <Link to="/products" className="inline-flex items-center gap-2 text-sm font-semibold hover:text-candy-red transition-colors">
+          <Link
+            to="/products"
+            className="inline-flex items-center gap-2 text-sm font-semibold hover:text-candy-red transition-colors"
+          >
             See all products <ArrowRight size={16} />
           </Link>
         </div>
@@ -155,16 +191,30 @@ function HomePage() {
         <div className="absolute inset-0 bg-gradient-sky opacity-10" aria-hidden />
         <div className="container relative mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto">
-            <span className="text-sm font-semibold text-candy-red uppercase tracking-wider">Why Bonvik</span>
+            <span className="text-sm font-semibold text-candy-red uppercase tracking-wider">
+              Why Bonvik
+            </span>
             <h2 className="mt-2 font-display text-4xl md:text-5xl font-bold">
               Built for kids. Engineered for distributors.
             </h2>
           </div>
           <div className="mt-14 grid md:grid-cols-3 gap-6">
             {[
-              { Icon: Shield, t: "Premium quality", d: "FSSAI-certified manufacturing with strict food-safety protocols on every batch." },
-              { Icon: Truck, t: "Pan-India logistics", d: "Fast dispatch from regional hubs. Low MOQs to test new SKUs without risk." },
-              { Icon: Heart, t: "Kid-loved branding", d: "Bright pack design and shelf-magnet shapes that drive impulse repeat sales." },
+              {
+                Icon: Shield,
+                t: "Premium quality",
+                d: "FSSAI-certified manufacturing with strict food-safety protocols on every batch.",
+              },
+              {
+                Icon: Truck,
+                t: "Pan-India logistics",
+                d: "Fast dispatch from regional hubs. Low MOQs to test new SKUs without risk.",
+              },
+              {
+                Icon: Heart,
+                t: "Kid-loved branding",
+                d: "Bright pack design and shelf-magnet shapes that drive impulse repeat sales.",
+              },
             ].map(({ Icon, t, d }, i) => (
               <motion.div
                 key={t}
@@ -188,16 +238,30 @@ function HomePage() {
       {/* TESTIMONIALS */}
       <section className="container mx-auto px-4 py-24">
         <div className="text-center max-w-2xl mx-auto">
-          <span className="text-sm font-semibold text-candy-red uppercase tracking-wider">Partners say</span>
+          <span className="text-sm font-semibold text-candy-red uppercase tracking-wider">
+            Partners say
+          </span>
           <h2 className="mt-2 font-display text-4xl md:text-5xl font-bold">
             Sweet returns, real stories.
           </h2>
         </div>
         <div className="mt-14 grid md:grid-cols-3 gap-6">
           {[
-            { q: "Bonvik's Korean Swirly Pops sold out in 4 days. The packaging does the marketing for us.", n: "Ravi Mehta", r: "Distributor, Pune" },
-            { q: "Margins are healthy and the team actually picks up the phone. Rare in FMCG today.", n: "Sana Khan", r: "Wholesaler, Lucknow" },
-            { q: "We added Bonvik to 120 stores last quarter. Repeat orders are our proof.", n: "Vikram S.", r: "Super-stockist, Hyderabad" },
+            {
+              q: "Bonvik's Korean Swirly Pops sold out in 4 days. The packaging does the marketing for us.",
+              n: "Ravi Mehta",
+              r: "Distributor, Pune",
+            },
+            {
+              q: "Margins are healthy and the team actually picks up the phone. Rare in FMCG today.",
+              n: "Sana Khan",
+              r: "Wholesaler, Lucknow",
+            },
+            {
+              q: "We added Bonvik to 120 stores last quarter. Repeat orders are our proof.",
+              n: "Vikram S.",
+              r: "Super-stockist, Hyderabad",
+            },
           ].map((t, i) => (
             <motion.div
               key={i}
@@ -208,7 +272,9 @@ function HomePage() {
               className="relative rounded-3xl border border-border bg-card p-7 shadow-soft"
             >
               <div className="flex gap-0.5 text-candy-yellow">
-                {Array.from({ length: 5 }).map((_, k) => <Star key={k} size={16} fill="currentColor" />)}
+                {Array.from({ length: 5 }).map((_, k) => (
+                  <Star key={k} size={16} fill="currentColor" />
+                ))}
               </div>
               <p className="mt-4 text-foreground/80 text-lg leading-relaxed">"{t.q}"</p>
               <div className="mt-6 flex items-center gap-3">
@@ -228,14 +294,21 @@ function HomePage() {
       {/* CTA BAND */}
       <section className="container mx-auto px-4 py-16">
         <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-candy p-10 md:p-16 text-white shadow-candy">
-          <div className="absolute -top-10 -right-10 h-64 w-64 rounded-full bg-white/10 blur-3xl" aria-hidden />
-          <div className="absolute -bottom-12 -left-12 h-72 w-72 rounded-full bg-candy-yellow/30 blur-3xl" aria-hidden />
+          <div
+            className="absolute -top-10 -right-10 h-64 w-64 rounded-full bg-white/10 blur-3xl"
+            aria-hidden
+          />
+          <div
+            className="absolute -bottom-12 -left-12 h-72 w-72 rounded-full bg-candy-yellow/30 blur-3xl"
+            aria-hidden
+          />
           <div className="relative max-w-2xl">
             <h2 className="font-display text-4xl md:text-5xl font-bold leading-tight">
               Ready to add Bonvik to your shelves?
             </h2>
             <p className="mt-4 text-white/90 text-lg">
-              Apply in 3 minutes. Our partnerships team gets back within 48 hours with pricing, samples and your nearest hub.
+              Apply in 3 minutes. Our partnerships team gets back within 48 hours with pricing,
+              samples and your nearest hub.
             </p>
             <Link
               to="/partner"
@@ -251,21 +324,41 @@ function HomePage() {
       <section className="container mx-auto px-4 py-24">
         <div className="grid lg:grid-cols-2 gap-12">
           <div>
-            <span className="text-sm font-semibold text-candy-red uppercase tracking-wider">FAQ</span>
+            <span className="text-sm font-semibold text-candy-red uppercase tracking-wider">
+              FAQ
+            </span>
             <h2 className="mt-2 font-display text-4xl md:text-5xl font-bold">
               Everything you'd ask before partnering.
             </h2>
             <p className="mt-4 text-foreground/70 max-w-md">
-              Can't find the answer? <Link to="/contact" className="text-candy-red underline underline-offset-4">Talk to our team</Link>.
+              Can't find the answer?{" "}
+              <Link to="/contact" className="text-candy-red underline underline-offset-4">
+                Talk to our team
+              </Link>
+              .
             </p>
           </div>
           <div className="space-y-3">
             {[
-              { q: "What's the minimum order quantity?", a: "MOQ starts at just 1 carton per SKU — perfect for trial orders before scaling." },
-              { q: "Do you support credit terms?", a: "After a 3-month relationship, qualifying partners get net-30 and other flexible terms." },
-              { q: "How fast is dispatch?", a: "Orders dispatch within 24–48 hours from our nearest regional hub." },
-              { q: "Do you provide marketing material?", a: "Yes — POS displays, shelf wobblers, danglers and digital creatives are bundled at no cost." },
-            ].map((f, i) => <FaqItem key={i} {...f} />)}
+              {
+                q: "What's the minimum order quantity?",
+                a: "MOQ starts at just 1 carton per SKU — perfect for trial orders before scaling.",
+              },
+              {
+                q: "Do you support credit terms?",
+                a: "After a 3-month relationship, qualifying partners get net-30 and other flexible terms.",
+              },
+              {
+                q: "How fast is dispatch?",
+                a: "Orders dispatch within 24–48 hours from our nearest regional hub.",
+              },
+              {
+                q: "Do you provide marketing material?",
+                a: "Yes — POS displays, shelf wobblers, danglers and digital creatives are bundled at no cost.",
+              },
+            ].map((f, i) => (
+              <FaqItem key={i} {...f} />
+            ))}
           </div>
         </div>
       </section>
@@ -276,7 +369,9 @@ function HomePage() {
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className={`rounded-2xl border border-border bg-card overflow-hidden transition-all ${open ? "shadow-soft" : ""}`}>
+    <div
+      className={`rounded-2xl border border-border bg-card overflow-hidden transition-all ${open ? "shadow-soft" : ""}`}
+    >
       <button
         onClick={() => setOpen((v) => !v)}
         className="w-full flex items-center justify-between gap-4 p-5 text-left font-display font-semibold"

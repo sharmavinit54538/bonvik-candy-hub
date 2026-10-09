@@ -17,7 +17,8 @@ export function SiteFooter() {
               </span>
             </div>
             <p className="mt-4 text-background/70">
-              Apna Bachpan… Bonvik Foods crafts joyful Indian confectionery — lollipops, jellies and candy toys — and partners with the country's most ambitious distributors.
+              Apna Bachpan… Bonvik Foods crafts joyful Indian confectionery — lollipops, jellies and
+              candy toys — and partners with the country's most ambitious distributors.
             </p>
             <div className="mt-6 flex items-center gap-3">
               {[Instagram, Facebook, Youtube].map((Icon, i) => (
@@ -38,10 +39,26 @@ export function SiteFooter() {
               Explore
             </h4>
             <ul className="mt-4 space-y-2 text-background/80">
-              <li><Link to="/products" className="hover:text-candy-yellow">Products</Link></li>
-              <li><Link to="/about" className="hover:text-candy-yellow">About</Link></li>
-              <li><Link to="/partner" className="hover:text-candy-yellow">Become Partner</Link></li>
-              <li><Link to="/contact" className="hover:text-candy-yellow">Contact</Link></li>
+              <li>
+                <Link to="/products" className="hover:text-candy-yellow">
+                  Products
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className="hover:text-candy-yellow">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link to="/partner" className="hover:text-candy-yellow">
+                  Become Partner
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="hover:text-candy-yellow">
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -52,18 +69,33 @@ export function SiteFooter() {
             <ul className="mt-4 space-y-3 text-background/80 text-sm">
               <li className="flex items-start gap-2">
                 <Mail size={16} className="mt-0.5 shrink-0" />
-                <a href="mailto:Bonvikfoods@gmail.com" className="hover:text-candy-yellow break-all">Bonvikfoods@gmail.com</a>
+                <a
+                  href="mailto:Bonvikfoods@gmail.com"
+                  className="hover:text-candy-yellow break-all"
+                >
+                  Bonvikfoods@gmail.com
+                </a>
               </li>
               <li className="flex items-start gap-2">
                 <Phone size={16} className="mt-0.5 shrink-0" />
                 <span>
-                  <a href="tel:+919988827786" className="hover:text-candy-yellow block">+91 99888 27786</a>
-                  <a href="tel:+919891914300" className="hover:text-candy-yellow block">+91 98919 14300</a>
+                  <a href="tel:+919988827786" className="hover:text-candy-yellow block">
+                    +91 99888 27786
+                  </a>
+                  <a href="tel:+919891914300" className="hover:text-candy-yellow block">
+                    +91 98919 14300
+                  </a>
                 </span>
               </li>
               <li className="flex items-start gap-2 text-background/60">
                 <MapPin size={16} className="mt-0.5 shrink-0" />
-                <span>New Shivaji Nagar,<br />Hargobind Nagar Road,<br />Ludhiana 141008, Punjab.</span>
+                <span>
+                  New Shivaji Nagar,
+                  <br />
+                  Hargobind Nagar Road,
+                  <br />
+                  Ludhiana 141008, Punjab.
+                </span>
               </li>
             </ul>
           </div>

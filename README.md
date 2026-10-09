@@ -4,18 +4,18 @@ The official web platform for **Bonvik Foods** — a premium Indian candy brand 
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Framework | [TanStack Start](https://tanstack.com/start) (React 19, SSR) |
-| Styling | [Tailwind CSS v4](https://tailwindcss.com/) |
-| UI Components | [Radix UI](https://radix-ui.com/) + [shadcn/ui](https://ui.shadcn.com/) |
-| Animations | [Framer Motion](https://www.framer.com/motion/) |
-| Charts | [Recharts](https://recharts.org/) |
-| Forms | [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/) |
-| State | [Zustand](https://zustand.docs.pmnd.rs/) |
-| Backend | [Supabase](https://supabase.com/) (PostgreSQL, Auth) |
-| Deployment | [Cloudflare Workers](https://workers.cloudflare.com/) via [Nitro](https://nitro.build/) |
-| Build Tool | [Vite 7](https://vite.dev/) |
+| Layer         | Technology                                                                              |
+| ------------- | --------------------------------------------------------------------------------------- |
+| Framework     | [TanStack Start](https://tanstack.com/start) (React 19, SSR)                            |
+| Styling       | [Tailwind CSS v4](https://tailwindcss.com/)                                             |
+| UI Components | [Radix UI](https://radix-ui.com/) + [shadcn/ui](https://ui.shadcn.com/)                 |
+| Animations    | [Framer Motion](https://www.framer.com/motion/)                                         |
+| Charts        | [Recharts](https://recharts.org/)                                                       |
+| Forms         | [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/)               |
+| State         | [Zustand](https://zustand.docs.pmnd.rs/)                                                |
+| Backend       | [Supabase](https://supabase.com/) (PostgreSQL, Auth)                                    |
+| Deployment    | [Cloudflare Workers](https://workers.cloudflare.com/) via [Nitro](https://nitro.build/) |
+| Build Tool    | [Vite 7](https://vite.dev/)                                                             |
 
 ## Features
 

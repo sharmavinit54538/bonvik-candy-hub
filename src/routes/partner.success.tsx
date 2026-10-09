@@ -6,7 +6,11 @@ export const Route = createFileRoute("/partner/success")({
   head: () => ({
     meta: [
       { title: "Application received — Bonvik Foods" },
-      { name: "description", content: "Thanks for applying to become a Bonvik Foods partner. Our team will reach out within 24 hours." },
+      {
+        name: "description",
+        content:
+          "Thanks for applying to become a Bonvik Foods partner. Our team will reach out within 24 hours.",
+      },
     ],
   }),
   component: SuccessPage,
@@ -47,10 +51,16 @@ function SuccessPage() {
           transition={{ delay: 0.4 }}
           className="mt-8 flex flex-wrap items-center justify-center gap-3"
         >
-          <Link to="/products" className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-sm font-semibold hover:bg-candy-red transition-colors shadow-pop">
+          <Link
+            to="/products"
+            className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-sm font-semibold hover:bg-candy-red transition-colors shadow-pop"
+          >
             Explore products <ArrowRight size={16} />
           </Link>
-          <Link to="/" className="inline-flex items-center gap-2 rounded-full glass px-6 py-3 text-sm font-semibold">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 rounded-full glass px-6 py-3 text-sm font-semibold"
+          >
             Back home
           </Link>
         </motion.div>

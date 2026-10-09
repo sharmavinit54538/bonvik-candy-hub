@@ -55,9 +55,7 @@ export default defineConfig(({ command, mode }) => {
             nitro({
               preset:
                 process.env.NITRO_PRESET ||
-                (process.env.CLOUDFLARE || process.env.CF_PAGES
-                  ? "cloudflare-module"
-                  : "vercel"),
+                (process.env.CLOUDFLARE || process.env.CF_PAGES ? "cloudflare-module" : "vercel"),
             }),
           ]
         : []),

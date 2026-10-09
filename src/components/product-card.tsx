@@ -11,9 +11,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
       transition={{ duration: 0.5, delay: (index % 6) * 0.05 }}
       className="group relative"
     >
-      <div
-        className="relative overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-candy"
-      >
+      <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-candy">
         <div
           aria-hidden
           className="absolute -top-16 -right-16 h-48 w-48 rounded-full opacity-30 blur-3xl transition-all group-hover:opacity-60 group-hover:scale-125"
@@ -47,7 +45,10 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
           <p className="mt-3 text-sm text-foreground/70 line-clamp-2">{product.description}</p>
           <div className="mt-4 flex flex-wrap gap-1.5">
             {product.flavors.slice(0, 3).map((f) => (
-              <span key={f} className="rounded-full bg-muted px-2.5 py-1 text-xs text-foreground/70">
+              <span
+                key={f}
+                className="rounded-full bg-muted px-2.5 py-1 text-xs text-foreground/70"
+              >
                 {f}
               </span>
             ))}

@@ -17,11 +17,39 @@ type Item = {
 
 const items: Item[] = [
   { src: lollipop, className: "top-[8%] left-[6%]", size: 90, delay: 0, duration: 7, rotate: 18 },
-  { src: swirly, className: "top-[18%] right-[10%]", size: 120, delay: 0.6, duration: 8, rotate: -22 },
+  {
+    src: swirly,
+    className: "top-[18%] right-[10%]",
+    size: 120,
+    delay: 0.6,
+    duration: 8,
+    rotate: -22,
+  },
   { src: bears, className: "top-[55%] left-[4%]", size: 110, delay: 1.1, duration: 9, rotate: 12 },
-  { src: twist, className: "bottom-[10%] right-[14%]", size: 100, delay: 0.4, duration: 7.5, rotate: -16 },
-  { src: wheel, className: "bottom-[25%] left-[20%] hidden md:block", size: 80, delay: 1.6, duration: 8.5, rotate: 24 },
-  { src: jelly, className: "top-[40%] right-[28%] hidden lg:block", size: 90, delay: 0.9, duration: 9.5, rotate: -10 },
+  {
+    src: twist,
+    className: "bottom-[10%] right-[14%]",
+    size: 100,
+    delay: 0.4,
+    duration: 7.5,
+    rotate: -16,
+  },
+  {
+    src: wheel,
+    className: "bottom-[25%] left-[20%] hidden md:block",
+    size: 80,
+    delay: 1.6,
+    duration: 8.5,
+    rotate: 24,
+  },
+  {
+    src: jelly,
+    className: "top-[40%] right-[28%] hidden lg:block",
+    size: 90,
+    delay: 0.9,
+    duration: 9.5,
+    rotate: -10,
+  },
 ];
 
 export function FloatingCandies() {

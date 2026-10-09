@@ -13,9 +13,16 @@ export const Route = createFileRoute("/partner")({
   head: () => ({
     meta: [
       { title: "Become a Partner — Bonvik Foods Distributor Program" },
-      { name: "description", content: "Apply to become a Bonvik Foods distributor, wholesaler or retail partner. High-margin candy brand expanding pan-India." },
+      {
+        name: "description",
+        content:
+          "Apply to become a Bonvik Foods distributor, wholesaler or retail partner. High-margin candy brand expanding pan-India.",
+      },
       { property: "og:title", content: "Bonvik Foods Partner Program" },
-      { property: "og:description", content: "Join India's fastest-growing candy brand. Apply in 2 minutes." },
+      {
+        property: "og:description",
+        content: "Join India's fastest-growing candy brand. Apply in 2 minutes.",
+      },
     ],
   }),
   component: PartnerPage,
@@ -24,12 +31,18 @@ export const Route = createFileRoute("/partner")({
 const schema = z.object({
   full_name: z.string().trim().min(2, "Enter your full name").max(80),
   business_name: z.string().trim().min(2, "Business name required").max(120),
-  mobile: z.string().trim().regex(/^[6-9]\d{9}$/, "Enter a valid 10-digit mobile"),
+  mobile: z
+    .string()
+    .trim()
+    .regex(/^[6-9]\d{9}$/, "Enter a valid 10-digit mobile"),
   email: z.string().trim().email("Enter a valid email").max(150),
   gst_number: z.string().trim().max(20).optional().or(z.literal("")),
   state: z.string().trim().min(2, "State required").max(60),
   city: z.string().trim().min(2, "City required").max(60),
-  pincode: z.string().trim().regex(/^\d{6}$/, "Enter a valid 6-digit pincode"),
+  pincode: z
+    .string()
+    .trim()
+    .regex(/^\d{6}$/, "Enter a valid 6-digit pincode"),
   address: z.string().trim().min(5, "Address required").max(300),
   distribution_type: z.enum(["distributor", "wholesaler", "retailer", "super-stockist"], {
     errorMap: () => ({ message: "Choose a business type" }),
@@ -43,9 +56,27 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 const steps = [
-  { id: "you", title: "About you", fields: ["full_name", "business_name", "mobile", "email"] as const },
-  { id: "loc", title: "Location", fields: ["state", "city", "pincode", "address", "gst_number"] as const },
-  { id: "biz", title: "Business", fields: ["distribution_type", "years_in_business", "monthly_capacity", "warehouse", "message"] as const },
+  {
+    id: "you",
+    title: "About you",
+    fields: ["full_name", "business_name", "mobile", "email"] as const,
+  },
+  {
+    id: "loc",
+    title: "Location",
+    fields: ["state", "city", "pincode", "address", "gst_number"] as const,
+  },
+  {
+    id: "biz",
+    title: "Business",
+    fields: [
+      "distribution_type",
+      "years_in_business",
+      "monthly_capacity",
+      "warehouse",
+      "message",
+    ] as const,
+  },
 ];
 
 const DRAFT_KEY = "bonvik:partner-draft";
@@ -58,10 +89,28 @@ function PartnerPage() {
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
     mode: "onTouched",
-    defaultValues: { full_name: "", business_name: "", mobile: "", email: "", gst_number: "", state: "", city: "", pincode: "", address: "", message: "" },
+    defaultValues: {
+      full_name: "",
+      business_name: "",
+      mobile: "",
+      email: "",
+      gst_number: "",
+      state: "",
+      city: "",
+      pincode: "",
+      address: "",
+      message: "",
+    },
   });
 
-  const { register, handleSubmit, trigger, watch, reset, formState: { errors } } = form;
+  const {
+    register,
+    handleSubmit,
+    trigger,
+    watch,
+    reset,
+    formState: { errors },
+  } = form;
 
   // Auto-save draft
   useEffect(() => {
@@ -75,7 +124,9 @@ function PartnerPage() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     const sub = watch((v) => {
-      try { localStorage.setItem(DRAFT_KEY, JSON.stringify(v)); } catch {}
+      try {
+        localStorage.setItem(DRAFT_KEY, JSON.stringify(v));
+      } catch {}
     });
     return () => sub.unsubscribe();
   }, [watch]);
@@ -120,7 +171,9 @@ function PartnerPage() {
         source: "Partner Form",
       }).catch(() => {});
     } catch {}
-    try { localStorage.removeItem(DRAFT_KEY); } catch {}
+    try {
+      localStorage.removeItem(DRAFT_KEY);
+    } catch {}
     navigate({ to: "/partner/success" });
   };
 
@@ -129,14 +182,24 @@ function PartnerPage() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-hero-glow opacity-70" aria-hidden />
         <div className="container relative mx-auto px-4 pt-28 pb-10 md:pt-32 md:pb-14 text-center">
-          <motion.span initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-semibold text-foreground/70">
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-semibold text-foreground/70"
+          >
             <Sparkles size={14} /> Partner Program · {new Date().getFullYear()}
           </motion.span>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mt-4 font-display text-4xl md:text-6xl font-bold tracking-tight">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="mt-4 font-display text-4xl md:text-6xl font-bold tracking-tight"
+          >
             Build a <span className="text-gradient-candy">sweet business</span> with us.
           </motion.h1>
           <p className="mt-4 text-foreground/70 max-w-xl mx-auto">
-            Apply in 2 minutes. Our team will reach out within 24 hours with margins, MOQ and territory details.
+            Apply in 2 minutes. Our team will reach out within 24 hours with margins, MOQ and
+            territory details.
           </p>
         </div>
       </section>
@@ -147,11 +210,17 @@ function PartnerPage() {
           <div className="mb-8 flex items-center justify-between gap-2">
             {steps.map((s, i) => (
               <div key={s.id} className="flex-1 flex items-center gap-2">
-                <div className={`flex items-center gap-2 ${i <= step ? "text-foreground" : "text-foreground/40"}`}>
+                <div
+                  className={`flex items-center gap-2 ${i <= step ? "text-foreground" : "text-foreground/40"}`}
+                >
                   <motion.span
                     animate={{ scale: i === step ? 1.05 : 1 }}
                     className={`inline-flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold ${
-                      i < step ? "bg-candy-red text-white" : i === step ? "bg-gradient-candy text-white shadow-candy" : "bg-muted"
+                      i < step
+                        ? "bg-candy-red text-white"
+                        : i === step
+                          ? "bg-gradient-candy text-white shadow-candy"
+                          : "bg-muted"
                     }`}
                   >
                     {i < step ? <Check size={16} /> : i + 1}
@@ -172,7 +241,10 @@ function PartnerPage() {
             ))}
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="rounded-3xl glass p-6 md:p-8 shadow-soft">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="rounded-3xl glass p-6 md:p-8 shadow-soft"
+          >
             <AnimatePresence mode="wait">
               <motion.div
                 key={step}
@@ -184,20 +256,59 @@ function PartnerPage() {
               >
                 {step === 0 && (
                   <div className="grid md:grid-cols-2 gap-4">
-                    <TextField name="full_name" label="Full name" register={register} errors={errors} />
-                    <TextField name="business_name" label="Company / business" register={register} errors={errors} />
-                    <TextField name="mobile" label="Mobile (10 digits)" register={register} errors={errors} inputMode="numeric" />
-                    <TextField name="email" label="Email" type="email" register={register} errors={errors} />
+                    <TextField
+                      name="full_name"
+                      label="Full name"
+                      register={register}
+                      errors={errors}
+                    />
+                    <TextField
+                      name="business_name"
+                      label="Company / business"
+                      register={register}
+                      errors={errors}
+                    />
+                    <TextField
+                      name="mobile"
+                      label="Mobile (10 digits)"
+                      register={register}
+                      errors={errors}
+                      inputMode="numeric"
+                    />
+                    <TextField
+                      name="email"
+                      label="Email"
+                      type="email"
+                      register={register}
+                      errors={errors}
+                    />
                   </div>
                 )}
                 {step === 1 && (
                   <div className="grid md:grid-cols-2 gap-4">
                     <TextField name="state" label="State" register={register} errors={errors} />
                     <TextField name="city" label="City" register={register} errors={errors} />
-                    <TextField name="pincode" label="Pincode" register={register} errors={errors} inputMode="numeric" />
-                    <TextField name="gst_number" label="GST number (optional)" register={register} errors={errors} />
+                    <TextField
+                      name="pincode"
+                      label="Pincode"
+                      register={register}
+                      errors={errors}
+                      inputMode="numeric"
+                    />
+                    <TextField
+                      name="gst_number"
+                      label="GST number (optional)"
+                      register={register}
+                      errors={errors}
+                    />
                     <div className="md:col-span-2">
-                      <TextArea name="address" label="Address" register={register} errors={errors} rows={3} />
+                      <TextArea
+                        name="address"
+                        label="Address"
+                        register={register}
+                        errors={errors}
+                        rows={3}
+                      />
                     </div>
                   </div>
                 )}
@@ -222,24 +333,48 @@ function PartnerPage() {
                         label="Years in business"
                         register={register}
                         errors={errors}
-                        options={[["", "Select…"], ["<1", "Less than 1"], ["1-3", "1–3"], ["3-5", "3–5"], ["5-10", "5–10"], ["10+", "10+"]]}
+                        options={[
+                          ["", "Select…"],
+                          ["<1", "Less than 1"],
+                          ["1-3", "1–3"],
+                          ["3-5", "3–5"],
+                          ["5-10", "5–10"],
+                          ["10+", "10+"],
+                        ]}
                       />
                       <SelectField
                         name="monthly_capacity"
                         label="Monthly capacity"
                         register={register}
                         errors={errors}
-                        options={[["", "Select…"], ["<1L", "< ₹1L"], ["1-5L", "₹1–5L"], ["5-10L", "₹5–10L"], ["10-25L", "₹10–25L"], ["25L+", "₹25L+"]]}
+                        options={[
+                          ["", "Select…"],
+                          ["<1L", "< ₹1L"],
+                          ["1-5L", "₹1–5L"],
+                          ["5-10L", "₹5–10L"],
+                          ["10-25L", "₹10–25L"],
+                          ["25L+", "₹25L+"],
+                        ]}
                       />
                       <SelectField
                         name="warehouse"
                         label="Warehouse"
                         register={register}
                         errors={errors}
-                        options={[["", "Select…"], ["yes", "Yes"], ["no", "No"]]}
+                        options={[
+                          ["", "Select…"],
+                          ["yes", "Yes"],
+                          ["no", "No"],
+                        ]}
                       />
                     </div>
-                    <TextArea name="message" label="Anything else? (optional)" register={register} errors={errors} rows={3} />
+                    <TextArea
+                      name="message"
+                      label="Anything else? (optional)"
+                      register={register}
+                      errors={errors}
+                      rows={3}
+                    />
                   </div>
                 )}
               </motion.div>
@@ -268,7 +403,15 @@ function PartnerPage() {
                   disabled={submitting}
                   className="inline-flex items-center gap-2 rounded-full bg-gradient-candy text-white px-6 py-3 text-sm font-semibold shadow-candy disabled:opacity-60"
                 >
-                  {submitting ? (<><Loader2 size={16} className="animate-spin" /> Submitting…</>) : (<>Submit application <ArrowRight size={16} /></>)}
+                  {submitting ? (
+                    <>
+                      <Loader2 size={16} className="animate-spin" /> Submitting…
+                    </>
+                  ) : (
+                    <>
+                      Submit application <ArrowRight size={16} />
+                    </>
+                  )}
                 </button>
               )}
             </div>
@@ -318,13 +461,23 @@ function TextArea({ name, label, register, errors, rows = 3 }: FieldProps & { ro
   );
 }
 
-function SelectField({ name, label, register, errors, options }: FieldProps & { options: [string, string][] }) {
+function SelectField({
+  name,
+  label,
+  register,
+  errors,
+  options,
+}: FieldProps & { options: [string, string][] }) {
   const err = errors[name]?.message as string | undefined;
   return (
     <div>
       <label className="block text-sm font-medium text-foreground/70 mb-1.5">{label}</label>
       <select {...register(name)} className={fieldClass(!!err)}>
-        {options.map(([v, l]) => (<option key={v} value={v}>{l}</option>))}
+        {options.map(([v, l]) => (
+          <option key={v} value={v}>
+            {l}
+          </option>
+        ))}
       </select>
       {err && <p className="mt-1 text-xs text-destructive">{err}</p>}
     </div>

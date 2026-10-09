@@ -7,7 +7,13 @@ const styles: Record<LeadPriority, string> = {
   High: "bg-red-500/15 text-red-300 border-red-400/30",
 };
 
-export function PriorityBadge({ priority, className }: { priority: LeadPriority; className?: string }) {
+export function PriorityBadge({
+  priority,
+  className,
+}: {
+  priority: LeadPriority;
+  className?: string;
+}) {
   return (
     <span
       className={cn(

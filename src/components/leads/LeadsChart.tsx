@@ -61,20 +61,48 @@ export function LeadsChart({ leads }: { leads: Lead[] }) {
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.08)" />
             <XAxis dataKey="date" stroke="rgba(255,255,255,0.5)" fontSize={11} />
             <YAxis stroke="rgba(255,255,255,0.5)" fontSize={11} allowDecimals={false} />
-            <Tooltip contentStyle={{ background: "#0f172a", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12 }} />
-            <Line type="monotone" dataKey="count" stroke="#FF2E4D" strokeWidth={2.5} dot={{ r: 3, fill: "#FF2E4D" }} />
+            <Tooltip
+              contentStyle={{
+                background: "#0f172a",
+                border: "1px solid rgba(255,255,255,0.1)",
+                borderRadius: 12,
+              }}
+            />
+            <Line
+              type="monotone"
+              dataKey="count"
+              stroke="#FF2E4D"
+              strokeWidth={2.5}
+              dot={{ r: 3, fill: "#FF2E4D" }}
+            />
           </LineChart>
         </ResponsiveContainer>
       </Card>
       <Card title="By status">
         <ResponsiveContainer width="100%" height={220}>
           <PieChart>
-            <Pie data={statusData} dataKey="value" nameKey="name" innerRadius={50} outerRadius={80} paddingAngle={3}>
+            <Pie
+              data={statusData}
+              dataKey="value"
+              nameKey="name"
+              innerRadius={50}
+              outerRadius={80}
+              paddingAngle={3}
+            >
               {statusData.map((entry) => (
-                <Cell key={entry.name} fill={STATUS_COLORS[entry.name as LeadStatus] ?? "#94a3b8"} />
+                <Cell
+                  key={entry.name}
+                  fill={STATUS_COLORS[entry.name as LeadStatus] ?? "#94a3b8"}
+                />
               ))}
             </Pie>
-            <Tooltip contentStyle={{ background: "#0f172a", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12 }} />
+            <Tooltip
+              contentStyle={{
+                background: "#0f172a",
+                border: "1px solid rgba(255,255,255,0.1)",
+                borderRadius: 12,
+              }}
+            />
             <Legend wrapperStyle={{ fontSize: 11, color: "white" }} />
           </PieChart>
         </ResponsiveContainer>
@@ -85,7 +113,13 @@ export function LeadsChart({ leads }: { leads: Lead[] }) {
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.08)" />
             <XAxis dataKey="name" stroke="rgba(255,255,255,0.5)" fontSize={11} />
             <YAxis stroke="rgba(255,255,255,0.5)" fontSize={11} allowDecimals={false} />
-            <Tooltip contentStyle={{ background: "#0f172a", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12 }} />
+            <Tooltip
+              contentStyle={{
+                background: "#0f172a",
+                border: "1px solid rgba(255,255,255,0.1)",
+                borderRadius: 12,
+              }}
+            />
             <Bar dataKey="value" fill="#3FB8FF" radius={[8, 8, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
@@ -94,11 +128,23 @@ export function LeadsChart({ leads }: { leads: Lead[] }) {
   );
 }
 
-function Card({ title, children, span = 1 }: { title: string; children: React.ReactNode; span?: number }) {
+function Card({
+  title,
+  children,
+  span = 1,
+}: {
+  title: string;
+  children: React.ReactNode;
+  span?: number;
+}) {
   const spanCls = span === 2 ? "lg:col-span-2" : span === 3 ? "lg:col-span-3" : "";
   return (
-    <div className={`rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-4 ${spanCls}`}>
-      <div className="mb-3 text-xs font-semibold uppercase tracking-wider text-white/60">{title}</div>
+    <div
+      className={`rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-4 ${spanCls}`}
+    >
+      <div className="mb-3 text-xs font-semibold uppercase tracking-wider text-white/60">
+        {title}
+      </div>
       {children}
     </div>
   );

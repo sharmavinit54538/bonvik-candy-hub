@@ -28,7 +28,9 @@ function AdminLoginPage() {
 
     async function checkExistingSession() {
       try {
-        const { data: { session } } = await supabase.auth.getSession();
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
         if (!session || !session.user) {
           if (mounted) setCheckingAuth(false);
           return;
@@ -36,8 +38,7 @@ function AdminLoginPage() {
 
         const user = session.user;
         const hasMetadataRole =
-          user.app_metadata?.role === "admin" ||
-          user.user_metadata?.role === "admin";
+          user.app_metadata?.role === "admin" || user.user_metadata?.role === "admin";
 
         if (hasMetadataRole) {
           navigate({ to: "/admin/leads" });
@@ -91,8 +92,7 @@ function AdminLoginPage() {
       // Verify admin role
       const user = data.user;
       const hasMetadataRole =
-        user.app_metadata?.role === "admin" ||
-        user.user_metadata?.role === "admin";
+        user.app_metadata?.role === "admin" || user.user_metadata?.role === "admin";
 
       if (hasMetadataRole) {
         toast.success(`Welcome back, ${user.email}!`);

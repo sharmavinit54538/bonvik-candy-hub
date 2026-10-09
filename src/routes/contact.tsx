@@ -10,9 +10,16 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — Bonvik Foods | Talk to our partner team" },
-      { name: "description", content: "Get in touch with Bonvik Foods for distribution, wholesale and retail partnership enquiries across India." },
+      {
+        name: "description",
+        content:
+          "Get in touch with Bonvik Foods for distribution, wholesale and retail partnership enquiries across India.",
+      },
       { property: "og:title", content: "Contact Bonvik Foods" },
-      { property: "og:description", content: "Reach our team for partnership, wholesale and retail enquiries." },
+      {
+        property: "og:description",
+        content: "Reach our team for partnership, wholesale and retail enquiries.",
+      },
     ],
   }),
   component: ContactPage,
@@ -34,7 +41,9 @@ function ContactPage() {
 
     if (error) {
       console.error("[ContactPage] Insert lead error:", error);
-      toast.error("Couldn't send your message. Please check your connection or contact us directly via phone/email.");
+      toast.error(
+        "Couldn't send your message. Please check your connection or contact us directly via phone/email.",
+      );
       throw error;
     }
 
@@ -87,11 +96,30 @@ function ContactPage() {
             className="lg:col-span-2 space-y-4"
           >
             {[
-              { icon: Mail, label: "Email", value: "Bonvikfoods@gmail.com", href: "mailto:Bonvikfoods@gmail.com" },
+              {
+                icon: Mail,
+                label: "Email",
+                value: "Bonvikfoods@gmail.com",
+                href: "mailto:Bonvikfoods@gmail.com",
+              },
               { icon: Phone, label: "Phone", value: "+91 99888 27786", href: "tel:+919988827786" },
-              { icon: Phone, label: "Alt. Phone", value: "+91 98919 14300", href: "tel:+919891914300" },
-              { icon: MessageCircle, label: "WhatsApp", value: "Chat with our partner team", href: "https://wa.me/919988827786" },
-              { icon: MapPin, label: "Head Office", value: "New Shivaji Nagar, Hargobind Nagar Road, Ludhiana 141008, Punjab" },
+              {
+                icon: Phone,
+                label: "Alt. Phone",
+                value: "+91 98919 14300",
+                href: "tel:+919891914300",
+              },
+              {
+                icon: MessageCircle,
+                label: "WhatsApp",
+                value: "Chat with our partner team",
+                href: "https://wa.me/919988827786",
+              },
+              {
+                icon: MapPin,
+                label: "Head Office",
+                value: "New Shivaji Nagar, Hargobind Nagar Road, Ludhiana 141008, Punjab",
+              },
             ].map((c, i) => (
               <motion.a
                 key={c.label}
@@ -108,7 +136,9 @@ function ContactPage() {
                   <c.icon size={20} />
                 </span>
                 <span>
-                  <span className="block text-xs uppercase tracking-wider text-foreground/50 font-semibold">{c.label}</span>
+                  <span className="block text-xs uppercase tracking-wider text-foreground/50 font-semibold">
+                    {c.label}
+                  </span>
                   <span className="block font-display font-semibold">{c.value}</span>
                 </span>
               </motion.a>

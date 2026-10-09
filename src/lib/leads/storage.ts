@@ -43,7 +43,7 @@ export const leadStorage = {
     } catch {
       return false;
     }
-  }
+  },
 };
 
 export function generateLeadId(): string {

@@ -31,7 +31,10 @@ export const Route = createFileRoute("/admin/leads")({
   head: () => ({
     meta: [
       { title: "Lead Management — Bonvik Foods Admin" },
-      { name: "description", content: "Unified lead and partner application CRM for the Bonvik Foods sales team." },
+      {
+        name: "description",
+        content: "Unified lead and partner application CRM for the Bonvik Foods sales team.",
+      },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
@@ -40,7 +43,8 @@ export const Route = createFileRoute("/admin/leads")({
 
 function AdminLeadsPage() {
   const navigate = useNavigate();
-  const { leads, fetchLeads, hydrated, loading, error, addLead, clearAll, importLegacyLeads } = useLeadStore();
+  const { leads, fetchLeads, hydrated, loading, error, addLead, clearAll, importLegacyLeads } =
+    useLeadStore();
 
   const [authChecked, setAuthChecked] = useState(false);
   const [currentUserEmail, setCurrentUserEmail] = useState<string | null>(null);
@@ -75,8 +79,7 @@ function AdminLeadsPage() {
       setCurrentUserEmail(user.email ?? null);
 
       const hasMetadataRole =
-        user.app_metadata?.role === "admin" ||
-        user.user_metadata?.role === "admin";
+        user.app_metadata?.role === "admin" || user.user_metadata?.role === "admin";
 
       if (hasMetadataRole) {
         setAuthChecked(true);
@@ -143,27 +146,25 @@ function AdminLeadsPage() {
     // Realtime channel
     const channel = supabase
       .channel("crm-leads-realtime")
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "leads" },
-        (payload) => {
-          console.log("[Realtime] leads change detected:", payload.eventType);
-          if (payload.eventType === "INSERT") {
-            toast.info("🍬 New contact lead received!", { description: (payload.new as any)?.name });
-          }
-          fetchLeads();
+      .on("postgres_changes", { event: "*", schema: "public", table: "leads" }, (payload) => {
+        console.log("[Realtime] leads change detected:", payload.eventType);
+        if (payload.eventType === "INSERT") {
+          toast.info("🍬 New contact lead received!", { description: (payload.new as any)?.name });
         }
-      )
+        fetchLeads();
+      })
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "partner_applications" },
         (payload) => {
           console.log("[Realtime] partner_applications change detected:", payload.eventType);
           if (payload.eventType === "INSERT") {
-            toast.info("🤝 New partner application received!", { description: (payload.new as any)?.business_name });
+            toast.info("🤝 New partner application received!", {
+              description: (payload.new as any)?.business_name,
+            });
           }
           fetchLeads();
-        }
+        },
       )
       .subscribe((status) => {
         if (status === "SUBSCRIBED") {
@@ -215,7 +216,8 @@ function AdminLeadsPage() {
       // Text query
       if (filter.q) {
         const q = filter.q.toLowerCase();
-        const hay = `${l.name} ${l.email} ${l.phone} ${l.company ?? ""} ${l.subject} ${l.message} ${l.notes ?? ""}`.toLowerCase();
+        const hay =
+          `${l.name} ${l.email} ${l.phone} ${l.company ?? ""} ${l.subject} ${l.message} ${l.notes ?? ""}`.toLowerCase();
         if (!hay.includes(q)) return false;
       }
 
@@ -298,7 +300,9 @@ function AdminLeadsPage() {
             <div className="flex items-center gap-3 text-sm">
               <UploadCloud className="h-5 w-5 text-amber-300 shrink-0" />
               <span>
-                <strong>Legacy leads detected in browser storage:</strong> You have offline leads saved locally in your browser. Migrate them to Supabase cloud storage so all team members can access them.
+                <strong>Legacy leads detected in browser storage:</strong> You have offline leads
+                saved locally in your browser. Migrate them to Supabase cloud storage so all team
+                members can access them.
               </span>
             </div>
             <button
@@ -340,9 +344,12 @@ function AdminLeadsPage() {
                 </>
               )}
             </div>
-            <h1 className="font-display text-4xl md:text-5xl font-bold tracking-tight">Lead Management</h1>
+            <h1 className="font-display text-4xl md:text-5xl font-bold tracking-tight">
+              Lead Management
+            </h1>
             <p className="mt-2 max-w-xl text-sm text-white/60">
-              Unified real-time pipeline of Contact inquiries and Partner distributor applications stored in Supabase.
+              Unified real-time pipeline of Contact inquiries and Partner distributor applications
+              stored in Supabase.
             </p>
           </div>
 
@@ -363,7 +370,7 @@ function AdminLeadsPage() {
                 if (filtered.length === 0) return toast.error("No leads to export");
                 downloadCsv(
                   `bonvik-leads-${new Date().toISOString().slice(0, 10)}.csv`,
-                  leadsToCsv(filtered)
+                  leadsToCsv(filtered),
                 );
                 toast.success(`Exported ${filtered.length} leads to CSV`);
               }}
@@ -399,7 +406,9 @@ function AdminLeadsPage() {
             <div className="mb-4 flex items-center justify-between">
               <div>
                 <h2 className="font-display text-lg font-semibold">Add Lead Manually</h2>
-                <p className="text-xs text-white/50">Create an inbound lead from phone, email, WhatsApp, or referral.</p>
+                <p className="text-xs text-white/50">
+                  Create an inbound lead from phone, email, WhatsApp, or referral.
+                </p>
               </div>
               <button
                 onClick={() => setShowNew(false)}
@@ -427,7 +436,9 @@ function AdminLeadsPage() {
         {error && (
           <div className="flex items-center gap-3 rounded-2xl border border-rose-500/30 bg-rose-500/10 p-4 text-xs text-rose-200">
             <AlertTriangle className="h-4 w-4 shrink-0 text-rose-400" />
-            <span>Note: {error}. If RLS is enabled, ensure your user has admin role in Supabase.</span>
+            <span>
+              Note: {error}. If RLS is enabled, ensure your user has admin role in Supabase.
+            </span>
           </div>
         )}
 

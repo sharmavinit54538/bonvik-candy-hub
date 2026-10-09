@@ -1,5 +1,18 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Copy, Mail, Phone, Building2, Clock, Tag, MapPin, Store, Calendar, FileText, CheckCircle2 } from "lucide-react";
+import {
+  X,
+  Copy,
+  Mail,
+  Phone,
+  Building2,
+  Clock,
+  Tag,
+  MapPin,
+  Store,
+  Calendar,
+  FileText,
+  CheckCircle2,
+} from "lucide-react";
 import { toast } from "sonner";
 import { StatusBadge } from "./StatusBadge";
 import { PriorityBadge } from "./PriorityBadge";
@@ -35,7 +48,9 @@ export function LeadDrawer({ lead, onClose }: { lead: Lead | null; onClose: () =
           >
             <div className="flex items-start justify-between">
               <div>
-                <div className="text-xs font-semibold uppercase tracking-wider text-white/50">{lead.id}</div>
+                <div className="text-xs font-semibold uppercase tracking-wider text-white/50">
+                  {lead.id}
+                </div>
                 <h3 className="mt-1 font-display text-2xl font-bold text-white">{lead.name}</h3>
                 <div className="mt-2 flex flex-wrap items-center gap-2">
                   <StatusBadge status={lead.status} />
@@ -62,7 +77,10 @@ export function LeadDrawer({ lead, onClose }: { lead: Lead | null; onClose: () =
               )}
               <Row icon={Mail} label="Email">
                 <span className="flex items-center gap-2">
-                  <a href={`mailto:${lead.email}`} className="hover:text-candy-red transition-colors">
+                  <a
+                    href={`mailto:${lead.email}`}
+                    className="hover:text-candy-red transition-colors"
+                  >
                     {lead.email}
                   </a>
                   <button
@@ -105,37 +123,49 @@ export function LeadDrawer({ lead, onClose }: { lead: Lead | null; onClose: () =
                   {lead.partnerDetails.distributionType && (
                     <div>
                       <span className="text-white/40 block">Business Type</span>
-                      <span className="font-semibold text-white capitalize">{lead.partnerDetails.distributionType}</span>
+                      <span className="font-semibold text-white capitalize">
+                        {lead.partnerDetails.distributionType}
+                      </span>
                     </div>
                   )}
                   {lead.partnerDetails.gstNumber && (
                     <div>
                       <span className="text-white/40 block">GST Number</span>
-                      <span className="font-semibold text-white">{lead.partnerDetails.gstNumber}</span>
+                      <span className="font-semibold text-white">
+                        {lead.partnerDetails.gstNumber}
+                      </span>
                     </div>
                   )}
                   {lead.partnerDetails.yearsInBusiness && (
                     <div>
                       <span className="text-white/40 block">Years in Business</span>
-                      <span className="font-semibold text-white">{lead.partnerDetails.yearsInBusiness} years</span>
+                      <span className="font-semibold text-white">
+                        {lead.partnerDetails.yearsInBusiness} years
+                      </span>
                     </div>
                   )}
                   {lead.partnerDetails.monthlyCapacity && (
                     <div>
                       <span className="text-white/40 block">Monthly Capacity</span>
-                      <span className="font-semibold text-white">{lead.partnerDetails.monthlyCapacity}</span>
+                      <span className="font-semibold text-white">
+                        {lead.partnerDetails.monthlyCapacity}
+                      </span>
                     </div>
                   )}
                   {lead.partnerDetails.warehouse && (
                     <div>
                       <span className="text-white/40 block">Warehouse Available</span>
-                      <span className="font-semibold text-white capitalize">{lead.partnerDetails.warehouse}</span>
+                      <span className="font-semibold text-white capitalize">
+                        {lead.partnerDetails.warehouse}
+                      </span>
                     </div>
                   )}
                   {lead.partnerDetails.pincode && (
                     <div>
                       <span className="text-white/40 block">Pincode</span>
-                      <span className="font-semibold text-white">{lead.partnerDetails.pincode}</span>
+                      <span className="font-semibold text-white">
+                        {lead.partnerDetails.pincode}
+                      </span>
                     </div>
                   )}
                 </div>
@@ -143,7 +173,8 @@ export function LeadDrawer({ lead, onClose }: { lead: Lead | null; onClose: () =
                   <div className="pt-2 border-t border-white/5 text-xs">
                     <span className="text-white/40 block">Full Address</span>
                     <span className="text-white/80">
-                      {lead.partnerDetails.address}, {lead.partnerDetails.city}, {lead.partnerDetails.state} - {lead.partnerDetails.pincode}
+                      {lead.partnerDetails.address}, {lead.partnerDetails.city},{" "}
+                      {lead.partnerDetails.state} - {lead.partnerDetails.pincode}
                     </span>
                   </div>
                 )}
@@ -151,15 +182,23 @@ export function LeadDrawer({ lead, onClose }: { lead: Lead | null; onClose: () =
             )}
 
             <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4">
-              <div className="text-xs font-semibold uppercase tracking-wider text-white/50">Subject</div>
+              <div className="text-xs font-semibold uppercase tracking-wider text-white/50">
+                Subject
+              </div>
               <div className="mt-1 font-semibold text-white">{lead.subject}</div>
-              <div className="mt-4 text-xs font-semibold uppercase tracking-wider text-white/50">Enquiry / Message</div>
-              <p className="mt-1.5 whitespace-pre-wrap text-sm text-white/80 leading-relaxed font-sans">{lead.message}</p>
+              <div className="mt-4 text-xs font-semibold uppercase tracking-wider text-white/50">
+                Enquiry / Message
+              </div>
+              <p className="mt-1.5 whitespace-pre-wrap text-sm text-white/80 leading-relaxed font-sans">
+                {lead.message}
+              </p>
             </div>
 
             {lead.notes && lead.source !== "Partner Form" && (
               <div className="mt-4 rounded-2xl border border-white/10 bg-white/5 p-4">
-                <div className="text-xs font-semibold uppercase tracking-wider text-white/50">Internal Notes</div>
+                <div className="text-xs font-semibold uppercase tracking-wider text-white/50">
+                  Internal Notes
+                </div>
                 <p className="mt-1 whitespace-pre-wrap text-sm text-white/80">{lead.notes}</p>
               </div>
             )}
@@ -183,7 +222,9 @@ function Row({
     <div className="flex items-start gap-3">
       <Icon className="mt-0.5 h-4 w-4 text-white/50" />
       <div className="flex-1">
-        <div className="text-[11px] font-semibold uppercase tracking-wider text-white/40">{label}</div>
+        <div className="text-[11px] font-semibold uppercase tracking-wider text-white/40">
+          {label}
+        </div>
         <div>{children}</div>
       </div>
     </div>

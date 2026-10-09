@@ -7,9 +7,16 @@ export const Route = createFileRoute("/products")({
   head: () => ({
     meta: [
       { title: "Products — Bonvik Foods Lollipops, Jellies & Candies" },
-      { name: "description", content: "Explore the full Bonvik Foods range: Korean Swirly Pops, Jelly Bears, Twist Spring Pops, Fruity Pop and more." },
+      {
+        name: "description",
+        content:
+          "Explore the full Bonvik Foods range: Korean Swirly Pops, Jelly Bears, Twist Spring Pops, Fruity Pop and more.",
+      },
       { property: "og:title", content: "Bonvik Foods Product Range" },
-      { property: "og:description", content: "Premium Indian candies built for distributors, wholesalers and retailers." },
+      {
+        property: "og:description",
+        content: "Premium Indian candies built for distributors, wholesalers and retailers.",
+      },
     ],
   }),
   component: ProductsPage,
@@ -37,7 +44,8 @@ function ProductsPage() {
             One brand. <span className="text-gradient-candy">Nine ways</span> to smile.
           </motion.h1>
           <p className="mt-5 text-foreground/70 max-w-2xl mx-auto">
-            From classic gummy bears to Korean-style swirl pops, every Bonvik product is engineered to fly off the counter.
+            From classic gummy bears to Korean-style swirl pops, every Bonvik product is engineered
+            to fly off the counter.
           </p>
         </div>
       </section>
