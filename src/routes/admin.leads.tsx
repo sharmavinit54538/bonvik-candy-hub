@@ -26,6 +26,11 @@ import { LeadDrawer } from "@/components/leads/LeadDrawer";
 import { LeadForm, type LeadFormValues } from "@/components/leads/LeadForm";
 import { downloadCsv, leadsToCsv } from "@/lib/leads/export";
 import { supabase } from "@/integrations/supabase/client";
+import type {
+  AuthChangeEvent,
+  Session,
+  RealtimePostgresChangesPayload,
+} from "@supabase/supabase-js";
 
 export const Route = createFileRoute("/admin/leads")({
   head: () => ({
@@ -114,7 +119,7 @@ function AdminLeadsPage() {
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    } = supabase.auth.onAuthStateChange((_event: AuthChangeEvent, session: Session | null) => {
       if (!session) {
         navigate({ to: "/admin/login" });
       }
@@ -146,17 +151,23 @@ function AdminLeadsPage() {
     // Realtime channel
     const channel = supabase
       .channel("crm-leads-realtime")
-      .on("postgres_changes", { event: "*", schema: "public", table: "leads" }, (payload) => {
-        console.log("[Realtime] leads change detected:", payload.eventType);
-        if (payload.eventType === "INSERT") {
-          toast.info("🍬 New contact lead received!", { description: (payload.new as any)?.name });
-        }
-        fetchLeads();
-      })
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "leads" },
+        (payload: RealtimePostgresChangesPayload<Record<string, unknown>>) => {
+          console.log("[Realtime] leads change detected:", payload.eventType);
+          if (payload.eventType === "INSERT") {
+            toast.info("🍬 New contact lead received!", {
+              description: (payload.new as any)?.name,
+            });
+          }
+          fetchLeads();
+        },
+      )
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "partner_applications" },
-        (payload) => {
+        (payload: RealtimePostgresChangesPayload<Record<string, unknown>>) => {
           console.log("[Realtime] partner_applications change detected:", payload.eventType);
           if (payload.eventType === "INSERT") {
             toast.info("🤝 New partner application received!", {
@@ -166,7 +177,7 @@ function AdminLeadsPage() {
           fetchLeads();
         },
       )
-      .subscribe((status) => {
+      .subscribe((status: string) => {
         if (status === "SUBSCRIBED") {
           setRealtimeActive(true);
         } else if (status === "CLOSED" || status === "CHANNEL_ERROR") {
