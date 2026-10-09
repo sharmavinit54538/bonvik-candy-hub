@@ -25,12 +25,12 @@ import { LeadTable } from "@/components/leads/LeadTable";
 import { LeadDrawer } from "@/components/leads/LeadDrawer";
 import { LeadForm, type LeadFormValues } from "@/components/leads/LeadForm";
 import { downloadCsv, leadsToCsv } from "@/lib/leads/export";
-import { supabase } from "@/integrations/supabase/client";
-import type {
-  AuthChangeEvent,
-  Session,
-  RealtimePostgresChangesPayload,
-} from "@supabase/supabase-js";
+import {
+  supabase,
+  type AuthChangeEvent,
+  type Session,
+  type RealtimePostgresChangesPayload,
+} from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/admin/leads")({
   head: () => ({

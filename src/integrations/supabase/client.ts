@@ -1,5 +1,13 @@
-import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import {
+  createClient,
+  type SupabaseClient,
+  type AuthChangeEvent,
+  type Session,
+  type RealtimePostgresChangesPayload,
+} from "@supabase/supabase-js";
 import type { Database } from "./types";
+
+export type { AuthChangeEvent, Session, RealtimePostgresChangesPayload, SupabaseClient };
 
 function createSupabaseClient(): SupabaseClient<Database> {
   // Use import.meta.env for client-side (Vite build-time replacement)
