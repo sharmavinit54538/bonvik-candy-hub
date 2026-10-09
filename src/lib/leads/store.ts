@@ -250,12 +250,15 @@ export const useLeadStore = create<LeadState>((set, get) => ({
     try {
       if (existing.source === "Partner Form") {
         // Status updates on partner rows must write back to partner_applications.status
-        const partnerUpdates: Record<string, any> = {};
+        const partnerUpdates: {
+          status?: string;
+          message?: string | null;
+        } = {};
         if (patch.status) {
           partnerUpdates.status = mapStatusToPartnerDb(patch.status);
         }
         if (patch.notes !== undefined) {
-          partnerUpdates.message = patch.notes;
+          partnerUpdates.message = patch.notes || null;
         }
 
         if (Object.keys(partnerUpdates).length > 0) {
@@ -271,9 +274,20 @@ export const useLeadStore = create<LeadState>((set, get) => ({
         }
       } else {
         // Standard lead update
-        const dbPatch: Record<string, any> = {};
+        const dbPatch: {
+          name?: string;
+          company?: string | null;
+          email?: string;
+          phone?: string;
+          subject?: string;
+          message?: string;
+          status?: string;
+          priority?: string;
+          source?: string;
+          notes?: string | null;
+        } = {};
         if (patch.name !== undefined) dbPatch.name = patch.name;
-        if (patch.company !== undefined) dbPatch.company = patch.company;
+        if (patch.company !== undefined) dbPatch.company = patch.company || null;
         if (patch.email !== undefined) dbPatch.email = patch.email;
         if (patch.phone !== undefined) dbPatch.phone = patch.phone;
         if (patch.subject !== undefined) dbPatch.subject = patch.subject;
@@ -281,7 +295,7 @@ export const useLeadStore = create<LeadState>((set, get) => ({
         if (patch.status !== undefined) dbPatch.status = patch.status;
         if (patch.priority !== undefined) dbPatch.priority = patch.priority;
         if (patch.source !== undefined) dbPatch.source = patch.source;
-        if (patch.notes !== undefined) dbPatch.notes = patch.notes;
+        if (patch.notes !== undefined) dbPatch.notes = patch.notes || null;
 
         const { error } = await supabase.from("leads").update(dbPatch).eq("id", id);
         if (error) {
