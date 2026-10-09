@@ -14,6 +14,75 @@ export type Database = {
   }
   public: {
     Tables: {
+      leads: {
+        Row: {
+          id: string
+          name: string
+          company: string | null
+          email: string
+          phone: string
+          subject: string
+          message: string
+          status: string
+          priority: string
+          source: string
+          notes: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          company?: string | null
+          email: string
+          phone: string
+          subject: string
+          message: string
+          status?: string
+          priority?: string
+          source?: string
+          notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          company?: string | null
+          email?: string
+          phone?: string
+          subject?: string
+          message?: string
+          status?: string
+          priority?: string
+          source?: string
+          notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      admin_users: {
+        Row: {
+          id: string
+          email: string | null
+          role: string
+          created_at: string
+        }
+        Insert: {
+          id: string
+          email?: string | null
+          role?: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          email?: string | null
+          role?: string
+          created_at?: string
+        }
+        Relationships: []
+      }
       partner_applications: {
         Row: {
           address: string
@@ -79,7 +148,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never

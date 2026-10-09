@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Copy, Mail, Phone, Building2, Clock, Tag } from "lucide-react";
+import { X, Copy, Mail, Phone, Building2, Clock, Tag, MapPin, Store, Calendar, FileText, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 import { StatusBadge } from "./StatusBadge";
 import { PriorityBadge } from "./PriorityBadge";
@@ -7,7 +7,11 @@ import type { Lead } from "@/lib/leads/types";
 
 function copy(text: string, label: string) {
   if (typeof navigator === "undefined" || !navigator.clipboard) return;
-  navigator.clipboard.writeText(text).then(() => toast.success(`${label} copied`));
+  try {
+    navigator.clipboard.writeText(text).then(() => toast.success(`${label} copied`));
+  } catch {
+    toast.error(`Failed to copy ${label}`);
+  }
 }
 
 export function LeadDrawer({ lead, onClose }: { lead: Lead | null; onClose: () => void }) {
@@ -27,46 +31,138 @@ export function LeadDrawer({ lead, onClose }: { lead: Lead | null; onClose: () =
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 28, stiffness: 260 }}
-            className="fixed right-0 top-0 z-50 h-full w-full max-w-md overflow-y-auto border-l border-white/10 bg-slate-950/95 p-6 backdrop-blur-xl"
+            className="fixed right-0 top-0 z-50 h-full w-full max-w-lg overflow-y-auto border-l border-white/10 bg-slate-950/95 p-6 backdrop-blur-xl shadow-2xl"
           >
             <div className="flex items-start justify-between">
               <div>
                 <div className="text-xs font-semibold uppercase tracking-wider text-white/50">{lead.id}</div>
                 <h3 className="mt-1 font-display text-2xl font-bold text-white">{lead.name}</h3>
-                <div className="mt-2 flex gap-2">
+                <div className="mt-2 flex flex-wrap items-center gap-2">
                   <StatusBadge status={lead.status} />
                   <PriorityBadge priority={lead.priority} />
+                  <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-xs text-white/80">
+                    {lead.source}
+                  </span>
                 </div>
               </div>
-              <button onClick={onClose} className="rounded-full p-2 text-white/60 hover:bg-white/10 hover:text-white" aria-label="Close">
+              <button
+                onClick={onClose}
+                className="rounded-full p-2 text-white/60 hover:bg-white/10 hover:text-white transition-colors"
+                aria-label="Close"
+              >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
             <div className="mt-6 space-y-3 text-sm text-white/80">
-              {lead.company && <Row icon={Building2} label="Company">{lead.company}</Row>}
+              {lead.company && (
+                <Row icon={Building2} label="Company / Business">
+                  {lead.company}
+                </Row>
+              )}
               <Row icon={Mail} label="Email">
                 <span className="flex items-center gap-2">
-                  <a href={`mailto:${lead.email}`} className="hover:text-candy-red">{lead.email}</a>
-                  <button onClick={() => copy(lead.email, "Email")} className="text-white/50 hover:text-white"><Copy className="h-3.5 w-3.5" /></button>
+                  <a href={`mailto:${lead.email}`} className="hover:text-candy-red transition-colors">
+                    {lead.email}
+                  </a>
+                  <button
+                    onClick={() => copy(lead.email, "Email")}
+                    title="Copy Email"
+                    className="text-white/50 hover:text-white transition-colors"
+                  >
+                    <Copy className="h-3.5 w-3.5" />
+                  </button>
                 </span>
               </Row>
               <Row icon={Phone} label="Phone">
                 <span className="flex items-center gap-2">
-                  <a href={`tel:${lead.phone}`} className="hover:text-candy-red">{lead.phone}</a>
-                  <button onClick={() => copy(lead.phone, "Phone")} className="text-white/50 hover:text-white"><Copy className="h-3.5 w-3.5" /></button>
+                  <a href={`tel:${lead.phone}`} className="hover:text-candy-red transition-colors">
+                    {lead.phone}
+                  </a>
+                  <button
+                    onClick={() => copy(lead.phone, "Phone")}
+                    title="Copy Phone"
+                    className="text-white/50 hover:text-white transition-colors"
+                  >
+                    <Copy className="h-3.5 w-3.5" />
+                  </button>
                 </span>
               </Row>
-              <Row icon={Tag} label="Source">{lead.source}</Row>
-              <Row icon={Clock} label="Created">{new Date(lead.createdAt).toLocaleString()}</Row>
+              <Row icon={Tag} label="Source">
+                {lead.source}
+              </Row>
+              <Row icon={Clock} label="Received Date">
+                {new Date(lead.createdAt).toLocaleString()}
+              </Row>
             </div>
+
+            {lead.partnerDetails && (
+              <div className="mt-6 rounded-2xl border border-amber-500/20 bg-amber-500/5 p-4 space-y-3">
+                <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-amber-300">
+                  <Store className="h-4 w-4" /> Partner Application Specifics
+                </div>
+                <div className="grid grid-cols-2 gap-3 text-xs">
+                  {lead.partnerDetails.distributionType && (
+                    <div>
+                      <span className="text-white/40 block">Business Type</span>
+                      <span className="font-semibold text-white capitalize">{lead.partnerDetails.distributionType}</span>
+                    </div>
+                  )}
+                  {lead.partnerDetails.gstNumber && (
+                    <div>
+                      <span className="text-white/40 block">GST Number</span>
+                      <span className="font-semibold text-white">{lead.partnerDetails.gstNumber}</span>
+                    </div>
+                  )}
+                  {lead.partnerDetails.yearsInBusiness && (
+                    <div>
+                      <span className="text-white/40 block">Years in Business</span>
+                      <span className="font-semibold text-white">{lead.partnerDetails.yearsInBusiness} years</span>
+                    </div>
+                  )}
+                  {lead.partnerDetails.monthlyCapacity && (
+                    <div>
+                      <span className="text-white/40 block">Monthly Capacity</span>
+                      <span className="font-semibold text-white">{lead.partnerDetails.monthlyCapacity}</span>
+                    </div>
+                  )}
+                  {lead.partnerDetails.warehouse && (
+                    <div>
+                      <span className="text-white/40 block">Warehouse Available</span>
+                      <span className="font-semibold text-white capitalize">{lead.partnerDetails.warehouse}</span>
+                    </div>
+                  )}
+                  {lead.partnerDetails.pincode && (
+                    <div>
+                      <span className="text-white/40 block">Pincode</span>
+                      <span className="font-semibold text-white">{lead.partnerDetails.pincode}</span>
+                    </div>
+                  )}
+                </div>
+                {lead.partnerDetails.address && (
+                  <div className="pt-2 border-t border-white/5 text-xs">
+                    <span className="text-white/40 block">Full Address</span>
+                    <span className="text-white/80">
+                      {lead.partnerDetails.address}, {lead.partnerDetails.city}, {lead.partnerDetails.state} - {lead.partnerDetails.pincode}
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
 
             <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4">
               <div className="text-xs font-semibold uppercase tracking-wider text-white/50">Subject</div>
               <div className="mt-1 font-semibold text-white">{lead.subject}</div>
-              <div className="mt-3 text-xs font-semibold uppercase tracking-wider text-white/50">Message</div>
-              <p className="mt-1 whitespace-pre-wrap text-sm text-white/80">{lead.message}</p>
+              <div className="mt-4 text-xs font-semibold uppercase tracking-wider text-white/50">Enquiry / Message</div>
+              <p className="mt-1.5 whitespace-pre-wrap text-sm text-white/80 leading-relaxed font-sans">{lead.message}</p>
             </div>
+
+            {lead.notes && lead.source !== "Partner Form" && (
+              <div className="mt-4 rounded-2xl border border-white/10 bg-white/5 p-4">
+                <div className="text-xs font-semibold uppercase tracking-wider text-white/50">Internal Notes</div>
+                <p className="mt-1 whitespace-pre-wrap text-sm text-white/80">{lead.notes}</p>
+              </div>
+            )}
           </motion.aside>
         </>
       )}
@@ -74,7 +170,15 @@ export function LeadDrawer({ lead, onClose }: { lead: Lead | null; onClose: () =
   );
 }
 
-function Row({ icon: Icon, label, children }: { icon: React.ComponentType<{ className?: string }>; label: string; children: React.ReactNode }) {
+function Row({
+  icon: Icon,
+  label,
+  children,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex items-start gap-3">
       <Icon className="mt-0.5 h-4 w-4 text-white/50" />

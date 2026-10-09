@@ -1,9 +1,10 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, MessageCircle, LayoutDashboard } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
 import { LeadForm, type LeadFormValues } from "@/components/leads/LeadForm";
-import { useLeadStore } from "@/lib/leads/store";
+import { supabase } from "@/integrations/supabase/client";
+import { notifyNewLead } from "@/lib/notifications";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -18,11 +19,36 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
-  const addLead = useLeadStore((s) => s.addLead);
-
   const onSubmit = async (values: LeadFormValues) => {
-    await new Promise((r) => setTimeout(r, 400));
-    addLead({ ...values, source: "Contact Form" });
+    const { error } = await supabase.from("leads").insert({
+      name: values.name,
+      company: values.company || null,
+      email: values.email,
+      phone: values.phone,
+      subject: values.subject,
+      message: values.message,
+      source: "Contact Form",
+      status: "New",
+      priority: "Medium",
+    });
+
+    if (error) {
+      console.error("[ContactPage] Insert lead error:", error);
+      toast.error("Couldn't send your message. Please check your connection or contact us directly via phone/email.");
+      throw error;
+    }
+
+    // Trigger notification
+    notifyNewLead({
+      name: values.name,
+      company: values.company,
+      email: values.email,
+      phone: values.phone,
+      subject: values.subject,
+      message: values.message,
+      source: "Contact Form",
+    }).catch(() => {});
+
     toast.success("Thanks! We'll reply within 24 hours.");
   };
 
@@ -49,11 +75,6 @@ function ContactPage() {
           <p className="mt-5 text-foreground/70 max-w-xl mx-auto">
             Partnership, wholesale, retail or just a sweet idea — drop us a line.
           </p>
-          <div className="mt-6">
-            <Link to="/admin/leads" className="inline-flex items-center gap-2 rounded-full glass px-4 py-2 text-xs font-semibold text-foreground/70 hover:text-foreground">
-              <LayoutDashboard size={14} /> Open Lead dashboard
-            </Link>
-          </div>
         </div>
       </section>
 

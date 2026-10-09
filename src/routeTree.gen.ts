@@ -15,6 +15,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as PartnerRouteImport } from './routes/partner'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as PartnerSuccessRouteImport } from './routes/partner.success'
 
 const IndexRoute = IndexRouteImport.update({
@@ -47,6 +48,11 @@ const AdminLeadsRoute = AdminLeadsRouteImport.update({
   path: '/admin/leads',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PartnerSuccessRoute = PartnerSuccessRouteImport.update({
   id: '/success',
   path: '/success',
@@ -60,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/partner': typeof PartnerRouteWithChildren
   '/products': typeof ProductsRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/admin/login': typeof AdminLoginRoute
   '/partner/success': typeof PartnerSuccessRoute
 }
 export interface FileRoutesByTo {
@@ -69,6 +76,7 @@ export interface FileRoutesByTo {
   '/partner': typeof PartnerRouteWithChildren
   '/products': typeof ProductsRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/admin/login': typeof AdminLoginRoute
   '/partner/success': typeof PartnerSuccessRoute
 }
 export interface FileRoutesById {
@@ -79,6 +87,7 @@ export interface FileRoutesById {
   '/partner': typeof PartnerRouteWithChildren
   '/products': typeof ProductsRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/admin/login': typeof AdminLoginRoute
   '/partner/success': typeof PartnerSuccessRoute
 }
 export interface FileRouteTypes {
@@ -90,6 +99,7 @@ export interface FileRouteTypes {
     | '/partner'
     | '/products'
     | '/admin/leads'
+    | '/admin/login'
     | '/partner/success'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -99,6 +109,7 @@ export interface FileRouteTypes {
     | '/partner'
     | '/products'
     | '/admin/leads'
+    | '/admin/login'
     | '/partner/success'
   id:
     | '__root__'
@@ -108,6 +119,7 @@ export interface FileRouteTypes {
     | '/partner'
     | '/products'
     | '/admin/leads'
+    | '/admin/login'
     | '/partner/success'
   fileRoutesById: FileRoutesById
 }
@@ -118,6 +130,7 @@ export interface RootRouteChildren {
   PartnerRoute: typeof PartnerRouteWithChildren
   ProductsRoute: typeof ProductsRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
+  AdminLoginRoute: typeof AdminLoginRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -164,6 +177,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLeadsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/partner/success': {
       id: '/partner/success'
       path: '/success'
@@ -192,6 +212,7 @@ const rootRouteChildren: RootRouteChildren = {
   PartnerRoute: PartnerRouteWithChildren,
   ProductsRoute: ProductsRoute,
   AdminLeadsRoute: AdminLeadsRoute,
+  AdminLoginRoute: AdminLoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

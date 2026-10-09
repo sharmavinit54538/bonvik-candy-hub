@@ -1,23 +1,49 @@
 import type { Lead } from "./types";
 
-const KEY = "bonvik.leads.v1";
+export const LOCAL_STORAGE_LEADS_KEY = "bonvik.leads.v1";
 
 export const leadStorage = {
   read(): Lead[] {
     if (typeof window === "undefined") return [];
     try {
-      const raw = window.localStorage.getItem(KEY);
+      const raw = window.localStorage.getItem(LOCAL_STORAGE_LEADS_KEY);
       if (!raw) return [];
       const parsed = JSON.parse(raw) as Lead[];
       return Array.isArray(parsed) ? parsed : [];
-    } catch {
+    } catch (err) {
+      console.warn("[leadStorage] Failed to read local leads:", err);
       return [];
     }
   },
-  write(leads: Lead[]) {
-    if (typeof window === "undefined") return;
-    window.localStorage.setItem(KEY, JSON.stringify(leads));
+  write(leads: Lead[]): boolean {
+    if (typeof window === "undefined") return false;
+    try {
+      window.localStorage.setItem(LOCAL_STORAGE_LEADS_KEY, JSON.stringify(leads));
+      return true;
+    } catch (err) {
+      console.warn("[leadStorage] Failed to write local leads:", err);
+      return false;
+    }
   },
+  clear(): boolean {
+    if (typeof window === "undefined") return false;
+    try {
+      window.localStorage.removeItem(LOCAL_STORAGE_LEADS_KEY);
+      return true;
+    } catch (err) {
+      console.warn("[leadStorage] Failed to clear local leads:", err);
+      return false;
+    }
+  },
+  hasLegacyLeads(): boolean {
+    if (typeof window === "undefined") return false;
+    try {
+      const leads = this.read();
+      return leads.length > 0;
+    } catch {
+      return false;
+    }
+  }
 };
 
 export function generateLeadId(): string {

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight, Check, Loader2, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { notifyNewLead } from "@/lib/notifications";
 
 export const Route = createFileRoute("/partner")({
   head: () => ({
@@ -108,6 +109,17 @@ function PartnerPage() {
       toast.error("Couldn't submit. Please try again.");
       return;
     }
+    try {
+      notifyNewLead({
+        name: values.full_name,
+        company: values.business_name,
+        email: values.email,
+        phone: values.mobile,
+        subject: `Partner Application — ${values.distribution_type.toUpperCase()} (${values.city}, ${values.state})`,
+        message: `Business: ${values.business_name}\nType: ${values.distribution_type}\nLocation: ${values.address}, ${values.city}, ${values.state} - ${values.pincode}\nGST: ${values.gst_number || "N/A"}\nCapacity: ${values.monthly_capacity || "N/A"}\nYears: ${values.years_in_business || "N/A"}\nWarehouse: ${values.warehouse || "N/A"}\nNotes: ${values.message || "N/A"}`,
+        source: "Partner Form",
+      }).catch(() => {});
+    } catch {}
     try { localStorage.removeItem(DRAFT_KEY); } catch {}
     navigate({ to: "/partner/success" });
   };
@@ -118,7 +130,7 @@ function PartnerPage() {
         <div className="absolute inset-0 bg-hero-glow opacity-70" aria-hidden />
         <div className="container relative mx-auto px-4 pt-28 pb-10 md:pt-32 md:pb-14 text-center">
           <motion.span initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-semibold text-foreground/70">
-            <Sparkles size={14} /> Partner Program · 2025
+            <Sparkles size={14} /> Partner Program · {new Date().getFullYear()}
           </motion.span>
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mt-4 font-display text-4xl md:text-6xl font-bold tracking-tight">
             Build a <span className="text-gradient-candy">sweet business</span> with us.

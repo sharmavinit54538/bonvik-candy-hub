@@ -8,6 +8,18 @@ export type LeadSource =
   | "WhatsApp"
   | "Other";
 
+export interface PartnerDetails {
+  city?: string;
+  state?: string;
+  pincode?: string;
+  address?: string;
+  gstNumber?: string | null;
+  distributionType?: string | null;
+  yearsInBusiness?: string | null;
+  monthlyCapacity?: string | null;
+  warehouse?: string | null;
+}
+
 export interface Lead {
   id: string;
   name: string;
@@ -22,6 +34,7 @@ export interface Lead {
   createdAt: string; // ISO
   updatedAt: string; // ISO
   notes?: string;
+  partnerDetails?: PartnerDetails;
 }
 
 export const LEAD_STATUSES: LeadStatus[] = [
