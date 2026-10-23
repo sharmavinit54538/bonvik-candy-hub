@@ -1,12 +1,12 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Facebook, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import { Instagram, Facebook, Youtube, Mail, Phone, MapPin, FileText } from "lucide-react";
 
 export function SiteFooter() {
   return (
     <footer className="relative mt-24 overflow-hidden bg-foreground text-background">
       <div className="absolute inset-0 bg-hero-glow opacity-20" aria-hidden />
       <div className="container relative mx-auto px-4 py-16">
-        <div className="grid gap-12 md:grid-cols-4">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="md:col-span-2 max-w-md">
             <div className="flex items-center gap-2">
               <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-candy text-white font-display font-bold">
@@ -80,21 +80,25 @@ export function SiteFooter() {
                 <Phone size={16} className="mt-0.5 shrink-0" />
                 <span>
                   <a href="tel:+919988827786" className="hover:text-candy-yellow block">
-                    +91 99888 27786
+                    +91-9988827786
                   </a>
                   <a href="tel:+919891914300" className="hover:text-candy-yellow block">
-                    +91 98919 14300
+                    +91-9891914300
                   </a>
                 </span>
               </li>
-              <li className="flex items-start gap-2 text-background/60">
+              <li className="flex items-start gap-2 text-background/70">
                 <MapPin size={16} className="mt-0.5 shrink-0" />
-                <span>
-                  New Shivaji Nagar,
-                  <br />
-                  Hargobind Nagar Road,
-                  <br />
-                  Ludhiana 141008, Punjab.
+                <span className="leading-relaxed break-words min-w-0">
+                  Office No. 227, 2nd Floor, MD Complex, Chandigarh Road, Samrala Chowk, Ludhiana,
+                  Punjab – 141008, India
+                </span>
+              </li>
+              <li className="flex items-start gap-2 text-background/70">
+                <FileText size={16} className="mt-0.5 shrink-0" />
+                <span className="min-w-0 break-words">
+                  <span className="text-background/60">GSTIN:</span>{" "}
+                  <span className="text-background/80">03ABFFB1686D1ZU</span>
                 </span>
               </li>
             </ul>

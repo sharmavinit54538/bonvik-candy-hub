@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle, FileText } from "lucide-react";
 import { toast } from "sonner";
 import { LeadForm, type LeadFormValues } from "@/components/leads/LeadForm";
 import { supabase } from "@/integrations/supabase/client";
@@ -102,11 +102,11 @@ function ContactPage() {
                 value: "Bonvikfoods@gmail.com",
                 href: "mailto:Bonvikfoods@gmail.com",
               },
-              { icon: Phone, label: "Phone", value: "+91 99888 27786", href: "tel:+919988827786" },
+              { icon: Phone, label: "Phone", value: "+91-9988827786", href: "tel:+919988827786" },
               {
                 icon: Phone,
                 label: "Alt. Phone",
-                value: "+91 98919 14300",
+                value: "+91-9891914300",
                 href: "tel:+919891914300",
               },
               {
@@ -118,31 +118,61 @@ function ContactPage() {
               {
                 icon: MapPin,
                 label: "Head Office",
-                value: "New Shivaji Nagar, Hargobind Nagar Road, Ludhiana 141008, Punjab",
+                value:
+                  "Office No. 227, 2nd Floor, MD Complex, Chandigarh Road, Samrala Chowk, Ludhiana, Punjab – 141008, India",
               },
-            ].map((c, i) => (
-              <motion.a
-                key={c.label}
-                href={c.href ?? "#"}
-                target={c.href?.startsWith("http") ? "_blank" : undefined}
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, x: -16 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="flex items-center gap-4 rounded-3xl glass p-5 hover:shadow-candy transition-shadow"
-              >
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-candy text-white shadow-candy">
-                  <c.icon size={20} />
-                </span>
-                <span>
-                  <span className="block text-xs uppercase tracking-wider text-foreground/50 font-semibold">
-                    {c.label}
+              {
+                icon: FileText,
+                label: "GSTIN",
+                value: "03ABFFB1686D1ZU",
+              },
+            ].map((c, i) => {
+              const cardContent = (
+                <>
+                  <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-candy text-white shadow-candy">
+                    <c.icon size={20} />
                   </span>
-                  <span className="block font-display font-semibold">{c.value}</span>
-                </span>
-              </motion.a>
-            ))}
+                  <span className="min-w-0">
+                    <span className="block text-xs uppercase tracking-wider text-foreground/50 font-semibold">
+                      {c.label}
+                    </span>
+                    <span className="block font-display font-semibold leading-snug break-words">
+                      {c.value}
+                    </span>
+                  </span>
+                </>
+              );
+
+              const cardClassName =
+                "flex items-center gap-4 rounded-3xl glass p-5 hover:shadow-candy transition-shadow";
+
+              return c.href ? (
+                <motion.a
+                  key={c.label}
+                  href={c.href}
+                  target={c.href.startsWith("http") ? "_blank" : undefined}
+                  rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  initial={{ opacity: 0, x: -16 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                  className={cardClassName}
+                >
+                  {cardContent}
+                </motion.a>
+              ) : (
+                <motion.div
+                  key={c.label}
+                  initial={{ opacity: 0, x: -16 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                  className={cardClassName}
+                >
+                  {cardContent}
+                </motion.div>
+              );
+            })}
           </motion.div>
 
           <motion.div
